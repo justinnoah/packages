@@ -6,7 +6,7 @@
 
 pkgbase=bind
 pkgname=(bind bind-tools)
-_pkgver=9.12.0
+_pkgver=9.12.1
 pkgver=${_pkgver//-/.}
 pkgrel=1
 url='https://www.isc.org/software/bind/'
@@ -27,11 +27,12 @@ source=("https://ftp.isc.org/isc/bind9/${_pkgver}/bind-${_pkgver}.tar.gz"{,.asc}
         'localhost.ip6.zone'
         '127.0.0.zone'
         'empty.zone')
-sha1sums=('55015312b571dd4f6e8ef7a054b6937378e092c4'
+sha1sums=('40538dcf8e4be7f02fefeafc3fa05eda0949bb57'
           'SKIP'
           'c5a2bcd9b0f009ae71f3a03fbdbe012196962a11'
           '9537f4835a1f736788d0733c7996a10db2d4eee4'
           'c017aae379c32c7cb1aa1ad84776b83e3a5c139f'
+          '62b06487323dd0d515a4dc659b8ecd193c29107b'
           '6704303a6ed431a29b1d8fe7b12decd4d1f2f50f'
           '52da8f1c0247a11b16daa4e03d920e8f09315cbe'
           '9c33726088342207ad06d33b2c13408290a0c8ad'
