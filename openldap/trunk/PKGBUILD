@@ -11,9 +11,8 @@ license=('custom')
 makedepends=('libltdl' 'libsasl' 'e2fsprogs' 'util-linux' 'chrpath' 'unixodbc')
 options=('!makeflags' 'emptydirs')
 source=(https://www.openldap.org/software/download/OpenLDAP/openldap-release/${pkgbase}-${pkgver}.tgz
-        slapd.service openldap.tmpfiles openldap.sysusers openldap-ntlm.patch)
+        openldap.tmpfiles openldap.sysusers openldap-ntlm.patch)
 sha1sums=('a9ae2273eb9bdd70090dafe0d018a3132606bef6'
-          '2441815efbfa01ad7a1d39068e5503b53d1d04b0'
           '1f68bd85fb50595c4e916db164d8e90e0c6e21ee'
           '2bf64351c32b0bf0a70663bd42de22910998b795'
           'e4afd9f1c810ef4c4cd8fe1101dfe5887f2b7eef')
