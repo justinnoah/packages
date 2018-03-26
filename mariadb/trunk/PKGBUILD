@@ -1,6 +1,4 @@
 # Maintainer: Chris Cromer <cromer@artixlinux.org>
-# Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
-# Contributor: Christian Hesse <mail@eworm.de>
 
 pkgbase=mariadb
 pkgname=('libmariadbclient' 'mariadb-clients' 'mytop' 'mariadb')
