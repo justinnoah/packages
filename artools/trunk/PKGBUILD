@@ -3,18 +3,22 @@
 pkgbase=artools
 pkgname=('artools-base' 'artools-pkg' 'artools-iso-base' 'artools-iso')
 pkgver=0.7.5.4
-pkgrel=1
+pkgrel=2
 arch=('any')
 pkgdesc='Development tools for Artix'
 license=('GPL')
 groups=('artools')
 url='https://github.com/artix-linux/artools'
-source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
-sha256sums=('77417d34ab2b355b34a35c798e12cf2b7085acec0e11182029a27b839dd688ab')
+source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
+        buildtree-unstable-init.patch::https://github.com/artix-linux/artools/commit/4a02e2d7be469db7fa42c12a7e01dfcbb47958ad.patch)
+sha256sums=('77417d34ab2b355b34a35c798e12cf2b7085acec0e11182029a27b839dd688ab'
+            'a279d879faaced7fdbb8dcd023fc155c4104d51e203a17bc57abe053daa2b14a')
 
 prepare() {
     cd ${srcdir}/${pkgbase}-${pkgver}
     sed -e "s/^Version=.*/Version=${pkgver}/" -i Makefile
+
+    patch -Np 1 -i ${srcdir}/buildtree-unstable-init.patch
 }
 
 build() {
