@@ -4,6 +4,6 @@ post_install() {
 }
 
 post_upgrade() {
-    echo -e "\033[1m==>\033[0m All binaries in this package has moved to /usr/lib/runit-artix, make"
-    echo -e "\033[1m==>\033[0m sure to update your symlinks."
+    echo -e "\033[1m==>\033[0m All runit services has been moved to /etc/runit/sv instead of /etc/sv,"
+    echo -e "\033[1m==>\033[0m Make sure to update your symlinks."
 }

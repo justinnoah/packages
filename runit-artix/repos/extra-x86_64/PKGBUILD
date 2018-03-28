@@ -1,8 +1,8 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
 pkgname=runit-artix
-pkgver=20180112
-pkgrel=2
+pkgver=20180327
+pkgrel=1
 pkgdesc='Runit initscripts for Artix'
 provides=('runit-init')
 url='https://github.com/artix-linux/runit-artix/'
@@ -14,7 +14,7 @@ source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/runit-artix
 backup=('etc/runit/rc.conf'
         'etc/runit/rc.local'
         'etc/runit/rc.shutdown')
-sha256sums=('ff0e39bcdced51ee040ab20447b2091a96943a88fbc9dec2eaaaf7ae907689ee')
+sha256sums=('42ba4636de39db8cfc4d4f2d5e49e61e01c681f4ab45a3a5a2562595a277f674')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
