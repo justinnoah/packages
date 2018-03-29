@@ -7,15 +7,12 @@ _url="https://github.com/OpenRC/openrc/archive"
 pkgbase=openrc
 pkgname=('openrc' 'openrc-sysvcompat' 'openrc-bash-completions' 'openrc-zsh-completions')
 pkgver=0.35.5
-pkgrel=2
+pkgrel=3
+pkgdesc="Gentoo's universal init system"
 arch=('i686' 'x86_64' 'armv7h')
 url="http://www.gentoo.org/proj/en/base/openrc/"
 license=('BSD2')
-makedepends=('psmisc' 'pam' 'opentmpfiles')
-optdepends=('netifrc: Network Interface Management Scripts'
-            'networkmanager-openrc: NetworkManager')
-conflicts=('systemd-sysvcompat' 'sysvinit')
-replaces=('sysvinit')
+makedepends=('psmisc' 'pam' 'opentmpfiles' 'zsh')
 options=('!emptydirs')
 source=("${pkgbase}-${pkgver}.tar.gz::${_url}/${pkgver}.tar.gz"
         "${pkgbase}.logrotate"
@@ -59,16 +56,17 @@ build(){
 }
 
 package_openrc() {
-	depends=('psmisc' 'pam' 'opentmpfiles' 'openrc-sysvcompat')
-	pkgdesc="Gentoo's universal init system"
-	install=${pkgname}.install
-	backup=('etc/rc.conf'
-			'etc/conf.d/consolefont'
-			'etc/conf.d/keymaps'
-			'etc/conf.d/hostname'
-			'etc/conf.d/modules'
-			'etc/conf.d/hwclock'
-			etc/conf.d/agetty.tty{1,2,3,4,5,6})
+    depends=('psmisc' 'pam' 'opentmpfiles' 'openrc-sysvcompat')
+    optdepends=('netifrc: Network Interface Management Scripts'
+                'networkmanager-openrc: NetworkManager')
+    install=${pkgname}.install
+    backup=('etc/rc.conf'
+            'etc/conf.d/consolefont'
+            'etc/conf.d/keymaps'
+            'etc/conf.d/hostname'
+            'etc/conf.d/modules'
+            'etc/conf.d/hwclock'
+            etc/conf.d/agetty.tty{1,2,3,4,5,6})
     cd "${srcdir}/${pkgbase}-${pkgver}"
 
     make DESTDIR="${pkgdir}" "${_args[@]}" install
@@ -102,40 +100,38 @@ package_openrc() {
     install -Dm644 ${srcdir}/${pkgname}-${pkgver}/LICENSE "$pkgdir/usr/share/licenses/${pkgbase}/LICENSE"
 
     # split completions
-    rm -rf "${pkgdir}"/usr/share/{bash-completion,zsh}
+    install -d ${srcdir}/_bash-completion/usr/share/bash-completion/completions
+    mv -v ${pkgdir}/usr/share/bash-completion/completions/* ${srcdir}/_bash-completion/usr/share/bash-completion/completions
+    install -d ${srcdir}/_zsh/usr/share/zsh/site-functions
+    mv -v ${pkgdir}/usr/share/zsh/site-functions/* ${srcdir}/_zsh/usr/share/zsh/site-functions
 
     # split sysvinit compat
-    mkdir -pv ${srcdir}/_sysvinit_compat/usr/{lib/openrc/bin,bin,share/man/man8}
+    install -d ${srcdir}/_sysvinit_compat/usr/{lib/openrc/bin,bin,share/man/man8}
     mv -v ${pkgdir}/usr/lib/openrc/bin/{halt,poweroff,reboot,shutdown} ${srcdir}/_sysvinit_compat/usr/lib/openrc/bin
     mv -v ${pkgdir}/usr/bin/{openrc-init,openrc-shutdown,init,halt,poweroff,reboot,shutdown} ${srcdir}/_sysvinit_compat/usr/bin
     mv -v ${pkgdir}/usr/share/man/man8/{openrc-init,openrc-shutdown}.8 ${srcdir}/_sysvinit_compat/usr/share/man/man8
+#     mv -v ${pkgdir}/usr/lib/lib{einfo,rc}.so* ${srcdir}/_sysvinit_compat/usr/lib
 }
 
 package_openrc-sysvcompat(){
     pkgdesc="Openrc sysvinit compatibility"
     depends=('sh')
-
-    cd ${pkgbase}-${pkgver}
+    conflicts=('sysvinit' 'systemd-sysvcompat')
+    replaces=('sysvinit')
 
     mv -v ${srcdir}/_sysvinit_compat/* ${pkgdir}
 }
 
 package_openrc-bash-completions() {
-	depends=('openrc' 'bash')
-	pkgdesc="OpenRC completions for Bash"
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}" "${_args[@]}" install
-	rm -rf "${pkgdir}"/etc
-	rm -rf "${pkgdir}"/usr/{bin,include,lib}
-	rm -rf "${pkgdir}"/usr/share/{libalpm,licenses,man,openrc,zsh}
+    depends=('openrc' 'bash')
+    pkgdesc="OpenRC completions for Bash"
+
+    mv -v ${srcdir}/_bash-completion/* ${pkgdir}
 }
 
 package_openrc-zsh-completions() {
-	depends=('openrc' 'zsh')
-	pkgdesc="OpenRC completions for ZSH"
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}" "${_args[@]}" install
-	rm -rf "${pkgdir}"/etc
-	rm -rf "${pkgdir}"/usr/{bin,include,lib}
-	rm -rf "${pkgdir}"/usr/share/{libalpm,licenses,man,openrc,bash-completion}
+    depends=('openrc' 'zsh')
+    pkgdesc="OpenRC completions for ZSH"
+
+    mv -v ${srcdir}/_zsh/* ${pkgdir}
 }
