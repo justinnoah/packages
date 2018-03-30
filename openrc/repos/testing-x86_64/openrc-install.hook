@@ -7,5 +7,5 @@ Target = etc/init.d/*
 [Action]
 Description = Displaying openrc service help ...
 When = PostTransaction
-Exec = /bin/bash -c 'echo "	==> Add a service to runlevel:"; echo "	rc-update add <service> <runlevel>"'
+Exec = /usr/share/libalpm/scripts/openrc-hook add
 NeedsTargets
