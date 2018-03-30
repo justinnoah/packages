@@ -7,9 +7,9 @@ _udev_ver=220
 pkgbase=eudev
 pkgname=('eudev' 'libeudev')
 pkgver=3.2.5
-pkgrel=5
+pkgrel=7
 pkgdesc="The userspace dev tools (udev) forked by Gentoo"
-arch=('i686' 'x86_64' 'armv7h')
+arch=('x86_64')
 url="http://www.gentoo.org/proj/en/eudev/"
 license=('GPL')
 makedepends=('gobject-introspection' 'gperf' 'gtk-doc' 'intltool' 'kmod' 'util-linux' 'libelf')
@@ -18,11 +18,15 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/gentoo/eudev/archive/v${pkg
         'initcpio_hooks'
         'initcpio_install'
         'udev-hwdb.hook'
+        'udev-reload.hook'
+        'udev-hook'
         'udev-hwdb-path.patch')
 sha256sums=('870920011285b919fca5c60eaa5670312eeffe3883dd8cf564cd1179fc639336'
             '892ce43218e0a458981bbce451252c8987dc398e60b8de288e7542b8f2409c13'
             '77dd1fd318b4456409aceb077f060b87944defb07cf39d29ad1968dc6f361875'
-            'a5eb54c78494ecc05412e3719ad030f2be181c04aa507ef3e37e6a6da025af65'
+            '2782bd3a7686596e98bd2d3fdef9d59d7d439682b87bbcc43b1fd1f5fabb3505'
+            '13596caef6ed85b58de674ebe7c47d9c7dd676240de5cc28ef3ccee2ce1d8a90'
+            '80c8f87549374d3bc7c2831b9e069b0005cc5ef90122c2d02e78e27c9bc1dbed'
             'e05e468d15d09fb49343f33bc8d21c08f54db3ecff412dc35d4acb0630f869a3')
 
 prepare(){
@@ -70,12 +74,14 @@ package_eudev() {
 
     install -Dm644 "${srcdir}/initcpio_hooks" "${pkgdir}/usr/lib/initcpio/hooks/udev"
     install -Dm644 "${srcdir}/initcpio_install" "${pkgdir}/usr/lib/initcpio/install/udev"
-    install -Dm644 "$srcdir/udev-hwdb.hook" "$pkgdir/usr/share/libalpm/hooks/udev-hwdb.hook"
+
+    # pacman hooks
+    install -Dm755 ${srcdir}/udev-hook "$pkgdir"/usr/share/libalpm/scripts/udev-hook
+    install -Dm644 -t "$pkgdir"/usr/share/libalpm/hooks ${srcdir}/*.hook
 }
 
 package_libeudev() {
     pkgdesc="eudev client libraries"
-    groups=('base-devel')
     depends=('glibc' 'libelf')
     provides=("libudev=${_udev_ver}" 'libudev.so')
 
