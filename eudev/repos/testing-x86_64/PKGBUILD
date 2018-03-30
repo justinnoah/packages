@@ -7,7 +7,7 @@ _udev_ver=220
 pkgbase=eudev
 pkgname=('eudev' 'libeudev')
 pkgver=3.2.5
-pkgrel=6
+pkgrel=7
 pkgdesc="The userspace dev tools (udev) forked by Gentoo"
 arch=('x86_64')
 url="http://www.gentoo.org/proj/en/eudev/"
@@ -19,7 +19,7 @@ source=("$pkgname-$pkgver.tar.gz::https://github.com/gentoo/eudev/archive/v${pkg
         'initcpio_install'
         'udev-hwdb.hook'
         'udev-reload.hook'
-        'udev.hook'
+        'udev-hook'
         'udev-hwdb-path.patch')
 sha256sums=('870920011285b919fca5c60eaa5670312eeffe3883dd8cf564cd1179fc639336'
             '892ce43218e0a458981bbce451252c8987dc398e60b8de288e7542b8f2409c13'
@@ -75,9 +75,9 @@ package_eudev() {
     install -Dm644 "${srcdir}/initcpio_hooks" "${pkgdir}/usr/lib/initcpio/hooks/udev"
     install -Dm644 "${srcdir}/initcpio_install" "${pkgdir}/usr/lib/initcpio/install/udev"
 
-    install -Dm644 "$srcdir/udev.hook" "$pkgdir/usr/share/libalpm/scripts/udev-hook"
-    install -Dm644 "$srcdir/udev-hwdb.hook" "$pkgdir/usr/share/libalpm/hooks/udev-hwdb.hook"
-    install -Dm644 "$srcdir/udev-reload.hook" "$pkgdir/usr/share/libalpm/hooks/udev-reload.hook"
+    # pacman hooks
+    install -Dm755 ${srcdir}/udev-hook "$pkgdir"/usr/share/libalpm/scripts/udev-hook
+    install -Dm644 -t "$pkgdir"/usr/share/libalpm/hooks ${srcdir}/*.hook
 }
 
 package_libeudev() {
