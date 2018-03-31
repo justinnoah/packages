@@ -11,7 +11,8 @@ arch=('i686' 'x86_64')
 url="http://www.gentoo.org/proj/en/base/openrc/"
 license=('GPL')
 groups=('openrc-world')
-depends=('libdaemon' 'dbus' 'openrc' 'polkit' 'nss-myhostname')
+depends=('libdaemon' 'openrc' 'polkit' 'nss-myhostname')
+makedepends=('python')
 conflicts=('systemd-sysvcompat')
 backup=('etc/conf.d/openrc-settingsd')
 source=("${_url}/${pkgname}-${pkgver}.tar.xz")
@@ -38,8 +39,6 @@ package() {
 
     sed -e 's|#!/sbin/runscript|#!/usr/bin/openrc-run|g' \
         -i ${pkgdir}/etc/init.d/openrc-settingsd
-
-#     rm -r ${pkgdir}/usr/share/{dbus,polkit}-1
 
     install -Dm644 ${srcdir}/${pkgname}-${pkgver}/COPYING "$pkgdir/usr/share/licenses/${pkgname}/COPYING"
 }
