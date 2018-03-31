@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+case $1 in
+  sysusers) /usr/bin/sysusers ;;
+  *) echo >&2 "  Invalid operation '$1'"; exit 1 ;;
+esac
+
+exit 0
