@@ -3,7 +3,7 @@
 
 pkgname=logrotate
 pkgver=3.14.0
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Rotates system logs automatically"
 arch=('x86_64')
 url="https://github.com/logrotate/logrotate"
@@ -45,4 +45,6 @@ package() {
 
 	install -dm755 "$pkgdir/etc/logrotate.d"
 	install -Dm644 "$srcdir/logrotate.conf" "$pkgdir/etc/logrotate.conf"
+
+	install -Dm755 examples/logrotate.cron "${pkgdir}"/etc/cron.daily/logrotate
 }
