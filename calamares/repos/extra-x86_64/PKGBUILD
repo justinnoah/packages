@@ -3,7 +3,7 @@
 pkgname=calamares
 pkgver=3.1.12.1
 _pkgver=3.1.12
-pkgrel=2
+pkgrel=3
 pkgdesc='Distribution-independent installer framework'
 arch=('i686' 'x86_64')
 license=(GPL)
@@ -31,7 +31,7 @@ sha256sums=('49dc6891e9d44070fca6dfa154d4775becfb0730696afb5287dd549d9fd8907f'
 prepare() {
 	cd $pkgname-$_pkgver
 	# patches here
-	
+
 	patch -Np 1 -i $srcdir/artix-modules.patch
 	patch -Np 1 -i $srcdir/artix-data.patch
 	patch -Np 1 -i $srcdir/artix-branding.patch
@@ -59,10 +59,10 @@ package() {
 	make DESTDIR="$pkgdir" install
 
     cd ${srcdir}/$pkgname-$_pkgver
-    
+
     install -dm755 ${pkgdir}/etc/calamares/modules
     install -m644 data/artix/settings.conf ${pkgdir}/etc/calamares/settings.conf
     install -m644 data/artix/modules/{machineid,finished,displaymanager,welcome,umount,locale}.conf ${pkgdir}/etc/calamares/modules/
-    
+
     install -m644 ${srcdir}/{squid,logo,languages}.png ${pkgdir}/usr/share/calamares/branding/artix/
 }
