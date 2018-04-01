@@ -1,27 +1,36 @@
-# Maintainer: Chris Cromer <cromer@artixlinux.org>
+# $Id$
+# Maintainer: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
+# Maintainer: Christian Hesse <mail@eworm.de>
 
 pkgbase=mariadb
 pkgname=('libmariadbclient' 'mariadb-clients' 'mytop' 'mariadb')
-pkgver=10.1.31
+pkgver=10.1.32
 pkgrel=1
 arch=('x86_64')
 license=('GPL')
 url='http://mariadb.org/'
-makedepends=('cmake' 'zlib' 'libaio' 'libxml2' 'openssl' 'jemalloc'
-             'lz4' 'boost' 'eudev' 'bzip2' 'lzo')
+makedepends=('boost' 'bzip2' 'cmake' 'jemalloc' 'libaio' 'libxml2' 'lz4' 'lzo'
+             'openssl' 'eudev' 'zlib')
 validpgpkeys=('199369E5404BD5FC7D2FE43BCBCB082A1BB943DB') # MariaDB Package Signing Key <package-signing-key@mariadb.org>
 source=("https://ftp.heanet.ie/mirrors/mariadb/mariadb-$pkgver/source/mariadb-$pkgver.tar.gz"{,.asc}
         '0001-openssl-1-1-0.patch'
         '0002-mroonga-after-merge-CMakeLists.txt-fixes.patch'
         'dont-check-systemd.patch')
-sha256sums=('ab7641c2fe4e5289da6141766a9c3350e013def56fafd6f1377080bc8048b2e6'
+sha256sums=('0e2aae6a6a190d07c8e36e87dd43377057fa82651ca3c583462563f3e9369096'
             'SKIP'
-            'c209c939e5b27582df16fe7cef8fd31c2c574165dddce15d157bfcf9a1a38b2f'
+            '229d556748119757f36be1e9956834be28db0f5a35cdacce53f6c640784fca77'
             '98736aefef21e575e450f8066685ba82771264409412e33491ab0a54e4407ba7'
             '11a216cda5e6cfbe6de7f3a29e802d2d0ab86da06b84935dfcdb3fb76a564267')
 
 prepare() {
   cd $pkgbase-$pkgver/
+
+  # Changes to the upstream unit files:
+  #  * remove the alias from unit files, we install symlinks in package function
+  #  * enable PrivateTmp for a little bit more security
+  sed -i -e '/^Alias/d' \
+    -e '/^PrivateTmp/c PrivateTmp=true' \
+    support-files/mariadb{,@}.service.in
 
   # openssl 1.1.0
   patch -Np1 < "${srcdir}"/0001-openssl-1-1-0.patch
@@ -30,11 +39,11 @@ prepare() {
   # mroonga after-merge CMakeLists.txt fixes
   patch -Np1 -R < "${srcdir}"/0002-mroonga-after-merge-CMakeLists.txt-fixes.patch
 
-  # allow sysusers and tmpfiles install without systemd check
-  patch -Np1 < "${srcdir}"/dont-check-systemd.patch
-
   # let's create the datadir from tmpfiles
   echo 'd @MYSQL_DATADIR@ 0700 @MYSQLD_USER@ @MYSQLD_USER@ -' >> support-files/tmpfiles.conf.in
+
+  # allow sysusers and tmpfiles install without systemd check
+  patch -Np1 < "${srcdir}"/dont-check-systemd.patch
 }
 
 build() {
@@ -70,7 +79,8 @@ build() {
     -DWITH_SSL=system \
     -DWITH_PCRE=bundled \
     -DWITH_LIBWRAP=OFF \
-    -DWITH_JEMALLOC=ON \
+    -DWITH_JEMALLOC=system \
+    -DTOKUDB_OK=0 \
     -DWITH_EXTRA_CHARSETS=complex \
     -DWITH_EMBEDDED_SERVER=ON \
     -DWITH_ARCHIVE_STORAGE_ENGINE=1 \
@@ -140,7 +150,7 @@ package_mariadb() {
   backup=('etc/mysql/my.cnf'
           'etc/mysql/wsrep.cnf')
   install=mariadb.install
-  depends=("mariadb-clients=${pkgver}" 'inetutils' 'libxml2' 'libeudev')
+  depends=("mariadb-clients=${pkgver}" 'inetutils' 'libeudev' 'libxml2')
   optdepends=('galera: for MariaDB cluster with Galera WSREP'
               'perl-dbd-mysql: for mysqlhotcopy, mysql_convert_table_format and mysql_setpermission')
   conflicts=('mysql')
