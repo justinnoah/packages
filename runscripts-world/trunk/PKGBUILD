@@ -17,7 +17,7 @@ pkgname=(
          'syslog-ng-runscripts'
          'cups-runscripts'
          'ntp-runscripts'
-         'fuse-runscripts'
+#         'fuse-runscripts'
          'metalog-runscripts'
          'sane-runscripts'
          'lirc-runscripts'
@@ -119,10 +119,6 @@ source=(
         "dnsmasq.run::${_url}/dnsmasq/files/dnsmasq/run"
 #       "fuse.initd::${_url}/sys-fs/fuse/files/fuse.init"
 )
-
-pkgver() {
-	date +%Y%m%d
-}
 
 _inst_logsv() {
     for file in run finish check; do
