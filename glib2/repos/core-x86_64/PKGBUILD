@@ -1,8 +1,9 @@
+# $Id$
 # Maintainer: Jan de Groot <jgc@archlinux.org>
 
 pkgbase=glib2
 pkgname=(glib2 glib2-docs)
-pkgver=2.56.0+7+g66948ae23
+pkgver=2.56.0+16+gecabc6e21
 pkgrel=1
 pkgdesc="Low level core library"
 url="https://wiki.gnome.org/Projects/GLib"
@@ -11,10 +12,10 @@ arch=(x86_64)
 depends=(pcre libffi libutil-linux zlib)
 makedepends=(gettext gtk-doc shared-mime-info python libelf git util-linux dbus)
 checkdepends=(desktop-file-utils)
-optdepends=('python: for gdbus-codegen and gtester-report'
+optdepends=('python: gdbus-codegen, glib-genmarshal, glib-mkenums, gtester-report'
             'libelf: gresource inspection tool')
 options=(!emptydirs)
-_commit=66948ae231f75a548c8a2eb7b3a9d64cfd728b8e  # glib-2-56
+_commit=ecabc6e21cd9db7dedd8aa0eb487aa5822f1eb30  # glib-2-56
 source=("git+https://gitlab.gnome.org/GNOME/glib.git#commit=$_commit"
         noisy-glib-compile-schemas.diff
         glib-compile-schemas.hook gio-querymodules.hook)
@@ -34,14 +35,12 @@ prepare() {
   # Suppress noise from glib-compile-schemas.hook
   patch -Np1 -i ../noisy-glib-compile-schemas.diff
 
-  #sed -i -e "/appinfo\/launch/d" gio/tests/appinfo.c
-
   NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
   local debug=minimum
-  check_option debug n && debug=yes
+  check_option debug y && debug=yes
 
   cd glib
   ./configure \
@@ -56,10 +55,10 @@ build() {
   make
 }
 
-# check() {
-#   cd glib
-#   make check
-# }
+check() {
+  cd glib
+  make check || :
+}
 
 package_glib2() {
   cd glib
