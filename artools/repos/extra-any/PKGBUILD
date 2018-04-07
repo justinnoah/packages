@@ -2,22 +2,19 @@
 
 pkgbase=artools
 pkgname=('artools-base' 'artools-pkg' 'artools-iso-base' 'artools-iso')
-pkgver=0.7.6
-pkgrel=2
+pkgver=0.7.6.1
+pkgrel=1
 arch=('any')
 pkgdesc='Development tools for Artix'
 license=('GPL')
 groups=('artools')
 url='https://github.com/artix-linux/artools'
-source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
-        find-repo.patch::https://github.com/artix-linux/artools/commit/d6bf8bcf12d9a891a7b6f5c1e64e18e549958261.patch)
-sha256sums=('f3045c852ddb7c7e0588fdb7e6cd7c8ef3e779c69035afa5798eb8dcc4e3b3c0'
-            'ecf9e83df38c96ccff20a431344389c9660774b34fb90d0a2331bd132d0c856c')
+source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
+sha256sums=('0c19d7d13ba4ca9d28aff8d89c45bd873626f027f8cb14ad77c5af07179c63f7')
 
 prepare() {
     cd ${srcdir}/${pkgbase}-${pkgver}
     sed -e "s/^Version=.*/Version=${pkgver}/" -i Makefile
-    patch -Np 1 -i ${srcdir}/find-repo.patch
 }
 
 build() {
