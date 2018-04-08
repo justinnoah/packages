@@ -2,7 +2,7 @@
 # Maintainer: artoo <artoo@artixlinux.org>
 
 pkgname=opensysusers
-pkgver=0.4.2
+pkgver=0.4.3
 pkgrel=1
 pkgdesc="A standalone utility for handling systemd-style sysusers.d users and groups"
 arch=('any')
@@ -13,7 +13,7 @@ makedepends=('docbook-xsl')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/opensysusers/archive/${pkgver}.tar.gz"
 		'opensysusers.hook'
 		'sysusers-hook')
-sha256sums=('d9eec691a03ad9f16621a2def4fe36a2551c60349eeca3d976c5dbc94a98f47f'
+sha256sums=('d56e5c1a40c0e6fd9943aa8a69761595df562e39e6cbf4639d96aff56582196c'
             'cefc133d78851cc3838eec273aeb127814c955be21c6e3fc0f9ba4391e534ec2'
             '4222b2496d8bb1ac9c07707e4ef1b334b8b59eb15451ea8ba0fd6e4c93e50c56')
 
