@@ -7,7 +7,7 @@ each_conf() {
 }
 
 case $1 in
-  sysusers) each_conf /usr/bin/sysusers ;;
+  sysusers) each_conf /usr/bin/systemd-sysusers ;;
   *) echo >&2 "  Invalid operation '$1'"; exit 1 ;;
 esac
 

@@ -3,7 +3,7 @@
 
 pkgname=opensysusers
 pkgver=0.4.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A standalone utility for handling systemd-style sysusers.d users and groups"
 arch=('any')
 url="https://github.com/artix-linux/opensysusers"
@@ -15,7 +15,7 @@ source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/opensysuser
 		'sysusers-hook')
 sha256sums=('e3b9d415779987b103ff2e9a79e2c3b2e3497296c25a4e757c7098ae4febf093'
             'e07d6258b37764190e4ab0f64d08ad9688b3a34b6c100be2d4aba970a8e26aee'
-            'd0add2ecae5619113640a454bd545e7317e3e7f72702b3f8b995322147fd2b16')
+            '4222b2496d8bb1ac9c07707e4ef1b334b8b59eb15451ea8ba0fd6e4c93e50c56')
 
 prepare(){
     cd "${srcdir}/${pkgname}-${pkgver}"
