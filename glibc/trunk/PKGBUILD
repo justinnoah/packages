@@ -16,14 +16,13 @@ makedepends=(git gd lib32-gcc-libs)
 options=(!strip staticlibs)
 _commit=23158b08a0908f381459f273a984c6fd328363cb
 #source=(git+https://sourceware.org/git/glibc.git#commit=$_commit
-source=(https://ftp.gnu.org/gnu/glibc/glibc-$pkgver.tar.xz{,.sig}
+source=(https://ftp.gnu.org/gnu/glibc/glibc-$pkgver.tar.xz
         locale.gen.txt
         locale-gen
         lib32-glibc.conf
         bz20338.patch)
 validpgpkeys=(7273542B39962DF7B299931416792B4EA25340F8) # Carlos O'Donell
 md5sums=('898cd5656519ffbc3a03fe811dd89e82'
-         'SKIP'
          '07ac979b6ab5eeb778d55f041529d623'
          '476e9113489f93b348b21e144b6a8fcf'
          '6e052f1cb693d5d3203f50f9d4e8c33b'
