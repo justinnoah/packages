@@ -1,8 +1,8 @@
 # Maintainer: artoo <artoo@cromnix.org>
 
 pkgbase=artools
-pkgname=('artools-base' 'artools-pkg' 'artools-iso-base' 'artools-iso')
-pkgver=0.7.6.1
+pkgname=('artools-base' 'artools-pkg' 'artools-iso')
+pkgver=0.8
 pkgrel=1
 arch=('any')
 pkgdesc='Development tools for Artix'
@@ -10,16 +10,16 @@ license=('GPL')
 groups=('artools')
 url='https://github.com/artix-linux/artools'
 source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
-sha256sums=('0c19d7d13ba4ca9d28aff8d89c45bd873626f027f8cb14ad77c5af07179c63f7')
+sha256sums=('eb32aad3d85fdf661ebe99eb4157f02336df8ec4bb9fcdf96e89922ba905aa44')
 
 prepare() {
     cd ${srcdir}/${pkgbase}-${pkgver}
-    sed -e "s/^Version=.*/Version=${pkgver}/" -i Makefile
+    sed -e "s/^VERSION=.*/VERSION=${pkgver}/" -i Makefile
 }
 
 build() {
     cd ${srcdir}/${pkgbase}-${pkgver}
-    make SYSCONFDIR=/etc PREFIX=/usr
+    make PREFIX=/usr
 }
 
 package_artools-base() {
@@ -30,7 +30,7 @@ package_artools-base() {
     backup=('etc/artools/artools.conf')
 
     cd ${srcdir}/${pkgbase}-${pkgver}
-    make SYSCONFDIR=/etc PREFIX=/usr DESTDIR=${pkgdir} install_base
+    make PREFIX=/usr DESTDIR=${pkgdir} install_base
 }
 
 package_artools-pkg() {
@@ -39,23 +39,17 @@ package_artools-pkg() {
     conflicts=('devtools')
 
     cd ${srcdir}/${pkgbase}-${pkgver}
-    make SYSCONFDIR=/etc PREFIX=/usr DESTDIR=${pkgdir} install_pkg
-}
-
-package_artools-iso-base() {
-    pkgdesc='Development tools for Artix (ISO base profile)'
-    depends=('artools-base')
-
-    cd ${srcdir}/${pkgbase}-${pkgver}
-    make SYSCONFDIR=/etc PREFIX=/usr DESTDIR=${pkgdir} install_isobase
+    make PREFIX=/usr DESTDIR=${pkgdir} install_pkg
 }
 
 package_artools-iso() {
     pkgdesc='Development tools for Artix (ISO tools)'
-    depends=('artools-iso-base' 'dosfstools' 'libisoburn'
+    depends=('dosfstools' 'libisoburn'
             'squashfs-tools' 'mkinitcpio' 'mktorrent' 'grub')
+    conflicts=('artools-iso-base')
+    replaces=('artools-iso-base')
 
     cd ${srcdir}/${pkgbase}-${pkgver}
-    make SYSCONFDIR=/etc PREFIX=/usr DESTDIR=${pkgdir} install_iso
+    make PREFIX=/usr DESTDIR=${pkgdir} install_iso
 }
 
