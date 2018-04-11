@@ -6,7 +6,7 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=openssh-runit
 pkgver=20180226
-pkgrel=1
+pkgrel=2
 pkgdesc="runit service scripts for openssh"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -15,7 +15,7 @@ groups=('runit-system')
 depends=('openssh')
 provides=('openssh-runscripts')
 replaces=('openssh-runscripts')
-source=("openssh.run::${_url}/openssh/files/sshd/run")
+source=("sshd.run::${_url}/openssh/files/sshd/run")
 sha256sums=('220dde8d4495bab6f08e063860c0ad54cc70ef8b7913a00e27126f1d5eb0af5f')
 
 _inst_sv(){
