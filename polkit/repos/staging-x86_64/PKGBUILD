@@ -3,7 +3,7 @@
 
 pkgname=polkit
 pkgver=0.114
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Application development toolkit for controlling system-wide privileges"
 arch=(x86_64)
 license=(LGPL)
@@ -12,9 +12,11 @@ depends=(glib2 pam expat elogind js52)
 makedepends=(intltool gtk-doc gobject-introspection git autoconf-archive)
 _commit=ed06baed179166389d536420a6fc532781d48178  # tags/0.114^0
 source=("git+https://anongit.freedesktop.org/git/polkit#commit=$_commit"
-        '99-artix.rules')
+        '99-artix.rules'
+        'elogind-configure-fix.patch')
 sha256sums=('SKIP'
-            'd28d6ecaf7682860e2b3768bb266bd94313546b7cd0ef3c2eace7b1576c47adb')
+            'd28d6ecaf7682860e2b3768bb266bd94313546b7cd0ef3c2eace7b1576c47adb'
+            'd90b2a95aa3e9e1ebf9369c038c144e04900e095c5405bc4ba4901c31bf3f59b')
 
 pkgver() {
   cd $pkgname
@@ -24,6 +26,7 @@ pkgver() {
 prepare() {
   cd $pkgname
   git cherry-pick -n 373705b35e7f6c7dc83de5e0a3ce11ecd15d0409
+  patch -Np 1 -i ${srcdir}/elogind-configure-fix.patch
   NOCONFIGURE=1 ./autogen.sh
 }
 
