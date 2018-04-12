@@ -7,7 +7,7 @@ pkgbase=util-linux
 pkgname=(util-linux libutil-linux)
 _pkgmajor=2.32
 pkgver=${_pkgmajor}
-pkgrel=2
+pkgrel=3
 pkgdesc="Miscellaneous system utilities for Linux"
 url="https://www.kernel.org/pub/linux/utils/util-linux/"
 arch=('x86_64')
@@ -44,7 +44,7 @@ build() {
   ./configure --prefix=/usr \
               --libdir=/usr/lib \
               --bindir=/usr/bin \
-              --localstatedir=/run \
+              --localstatedir=/var \
               --enable-fs-paths-extra=/usr/bin \
               --enable-raw \
               --enable-vipw \
@@ -52,9 +52,9 @@ build() {
               --enable-chfn-chsh \
               --enable-write \
               --enable-mesg \
+              --with-python=3 \
               --with-systemd=no \
-              --with-systemdsystemunitdir=no \
-              --with-python=3
+              --with-systemdsystemunitdir=no
 
   make
 }
@@ -85,9 +85,6 @@ package_util-linux() {
   install -m644 "$srcdir/pam-login" "$pkgdir/etc/pam.d/login"
   install -m644 "$srcdir/pam-su" "$pkgdir/etc/pam.d/su"
   install -m644 "$srcdir/pam-su" "$pkgdir/etc/pam.d/su-l"
-
-  # TODO(dreisner): offer this upstream?
-#   sed -i '/ListenStream/ aRuntimeDirectory=uuidd' "$pkgdir/usr/lib/systemd/system/uuidd.socket"
 
   # adjust for usrmove
   # TODO(dreisner): fix configure.ac upstream so that this isn't needed
