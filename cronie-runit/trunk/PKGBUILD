@@ -6,7 +6,7 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=cronie-runit
 pkgver=20180226
-pkgrel=1
+pkgrel=2
 pkgdesc="runit service scripts for cronie"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -29,5 +29,6 @@ _inst_sv(){
 }
 
 package() {
+    sed -e 's|cronie-crond|crond|g' -i "$srcdir/cronie.run"
     _inst_sv 'cronie'
 }
