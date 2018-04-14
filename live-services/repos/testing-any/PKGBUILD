@@ -6,14 +6,14 @@ pkgname=('artix-live-base'
 	'artix-live-openrc'
 	'artix-live-portable-efi'
 	'artix-live-runit')
-pkgver=0.4.6.1
+pkgver=0.5
 pkgrel=1
 pkgdesc='Artix live session'
 arch=('any')
 url="https://github.com/artix-linux/live-services"
 license=('GPL')
 source=("${pkgbase}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('144f9cdefbaf88a71a97662c9759b59f9a5bdb7f6545a118c88c7b5443e0f253')
+sha256sums=('21089cd13853ebff447d3e94e3d4bbe4cff7ae2fc1abcdebb1412fc0ae448753')
 
 build() {
     cd ${pkgbase}-${pkgver}
