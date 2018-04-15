@@ -3,7 +3,8 @@ post_install() {
     echo -e "\033[1m==>\033[0m /usr/lib/runit-artix/bin to /usr/bin."
 }
 
-post_upgrade() {
-    echo -e "\033[1m==>\033[0m All runit services has been moved to /etc/runit/sv instead of /etc/sv,"
-    echo -e "\033[1m==>\033[0m Make sure to update your symlinks."
+pre_upgrade() {
+    echo -e "\033[1m==>\033[0m Binaries 'pause', 'modules-load' and 'zzz' has been moved back to"
+    echo -e "\033[1m==>\033[0m /usr/bin, remove any /usr/bin/pause, /usr/bin/modules-load, and"
+    echo -e "\033[1m==>\033[0m /usr/bin/zzz symlinks you made. We're sorry for the inconvenience."
 }
