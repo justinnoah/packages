@@ -7,12 +7,12 @@ _url="https://github.com/OpenRC/openrc/archive"
 pkgbase=openrc
 pkgname=('openrc' 'openrc-bash-completions' 'openrc-zsh-completions')
 pkgver=0.35.5
-pkgrel=5
+pkgrel=6
 pkgdesc="Gentoo's universal init system"
 arch=('i686' 'x86_64' 'armv7h')
 url="http://www.gentoo.org/proj/en/base/openrc/"
 license=('BSD2')
-makedepends=('psmisc' 'pam' 'opentmpfiles-openrc' 'zsh')
+makedepends=('psmisc' 'pam' 'opentmpfiles-openrc' 'opensysusers-openrc' 'zsh')
 options=('!emptydirs')
 source=("${pkgbase}-${pkgver}.tar.gz::${_url}/${pkgver}.tar.gz"
         "${pkgbase}.logrotate"
@@ -62,7 +62,7 @@ build(){
 }
 
 package_openrc() {
-    depends=('psmisc' 'pam' 'opentmpfiles-openrc')
+    depends=('psmisc' 'pam' 'opentmpfiles-openrc' 'opensysusers-openrc')
     optdepends=('netifrc: Network Interface Management Scripts'
                 'networkmanager-openrc: NetworkManager')
     install=${pkgname}.install
