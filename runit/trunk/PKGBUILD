@@ -3,18 +3,29 @@
 pkgbase=runit
 pkgname=('runit' 'runit-doc')
 pkgver=2.1.2
-pkgrel=2
+pkgrel=3
 pkgdesc='runit is a cross-platform Unix init scheme with service supervision'
 arch=('x86_64')
 url='http://smarden.org/runit/'
 license=('BSD3')
-source=("http://smarden.org/${pkgname}/${pkgbase}-${pkgver}.tar.gz")
-md5sums=('6c985fbfe3a34608eb3c53dc719172c4')
+source=("http://smarden.org/${pkgname}/${pkgbase}-${pkgver}.tar.gz"
+        "clearmem.patch"
+        "svlogd.patch"
+        "utmpset-time_t.patch")
+sha256sums=('6fd0160cb0cf1207de4e66754b6d39750cff14bb0aa66ab49490992c0c47ba18'
+            '19b5e99135f153d07052f2dff707430af9faeabc717a5740ea58a8a783f609de'
+            '9cf269264c0713975be1b3bc9dd3b5b3bb1e2078ac596527370a902d8d025a5a'
+            '527f68f501cc9eb4bbab33f8ad374822624342c7d74b5c795efe4aac6b3f170a')
 
 prepare() {
 	# set default service path to /run/runit/service
 	cd "${srcdir}/admin/${pkgbase}-${pkgver}"
 	sed -i 's|"/service/"|"/run/runit/service/"|' src/sv.c
+
+	# apply patches
+	patch -p1 -i "${srcdir}/clearmem.patch"
+	patch -p1 -i "${srcdir}/svlogd.patch"
+	patch -p1 -i "${srcdir}/utmpset-time_t.patch"
 }
 
 build() {
@@ -32,10 +43,9 @@ check() {
 }
 
 package_runit() {
-	depends=('bash' 'runit-init' 'util-linux')
-	optdepends=('runit-doc: documentation')
-	groups=('init')
-	conflicts=('openrc')
+	depends=('bash' 'util-linux')
+	optdepends=('runit-doc: documentation'
+	            'runit-artix: the initscripts for runit')
 	# commands
 	mkdir -p "${pkgdir}/usr/bin"
 	install -Dm755 ${srcdir}/admin/${pkgbase}-${pkgver}/command/* "${pkgdir}/usr/bin"
@@ -49,8 +59,6 @@ package_runit() {
 
 	# license
 	install -Dm644 "${srcdir}/admin/${pkgbase}-${pkgver}/package/COPYING" "$pkgdir/usr/share/licenses/runit/COPYING"
-
-	ln -srv ${pkgdir}/usr/bin/runit-init ${pkgdir}/usr/bin/init
 }
 
 package_runit-doc() {
