@@ -2,7 +2,7 @@
 
 pkgname=runit-artix
 pkgver=20180414
-pkgrel=2
+pkgrel=3
 pkgdesc='Runit initscripts for Artix'
 provides=('runit-init')
 url='https://github.com/artix-linux/runit-artix/'
@@ -33,6 +33,6 @@ package() {
 	sed -n '/To the extent/,/0/p' README.md > "${pkgdir}"/usr/share/licenses/runit-artix/LICENSE
 
 	# init symlink
-	mkdir -p "${pkgdir}/bin"
+	install -d -m644 "${pkgdir}/bin"
 	ln -s runit-init "${pkgdir}/bin/init"
 }
