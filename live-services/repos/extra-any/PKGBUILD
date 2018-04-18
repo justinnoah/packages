@@ -4,15 +4,16 @@
 pkgbase=live-services
 pkgname=('artix-live-base'
 	'artix-live-openrc'
-	'artix-live-portable-efi')
-pkgver=0.4.4
+	'artix-live-portable-efi'
+	'artix-live-runit')
+pkgver=0.5.1
 pkgrel=1
 pkgdesc='Artix live session'
 arch=('any')
 url="https://github.com/artix-linux/live-services"
 license=('GPL')
 source=("${pkgbase}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('c34be476487d22622cd0e5940c1d01cb046106228ff819868d0b01f802087ac5')
+sha256sums=('ce4e19748334881a2f037db48ca1513e0de1c3d0e3af8f064a6afeb1f21fcfaa')
 
 build() {
     cd ${pkgbase}-${pkgver}
@@ -41,4 +42,12 @@ package_artix-live-portable-efi() {
 
     cd ${pkgbase}-${pkgver}
     make PREFIX=/usr SYSCONFDIR=/etc DESTDIR=${pkgdir} install_portable_efi
+}
+
+package_artix-live-runit() {
+    pkgdesc='Artix live runit init scripts'
+    depends=('runit-artix' 'artix-live-base')
+
+    cd ${pkgbase}-${pkgver}
+    make PREFIX=/usr SYSCONFDIR=/etc DESTDIR=${pkgdir} install_runit
 }
