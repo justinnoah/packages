@@ -14,7 +14,7 @@ conflicts=('pacman-mirrorlist')
 replaces=('pacman-mirrorlist')
 backup=(etc/pacman.d/mirrorlist)
 source=(mirrorlist)
-sha256sums=('d3c899907e47c1584934a057b5b66f93deb27f0f98d5e516f9242dbeaf30e5c7')
+sha256sums=('910cff711167d6c22e4d95f4b657ac2ab549c5d7b7d0d2614ad4ecc8ac0c4fb7')
 
 package() {
   mkdir -p $pkgdir/etc/pacman.d
