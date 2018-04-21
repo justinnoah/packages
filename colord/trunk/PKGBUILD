@@ -35,7 +35,7 @@ build() {
     -D vapi=true \
     -D print_profiles=true \
     -D daemon_user=colord \
-    -Denable-systemd=false
+    -D systemd=false
   ninja -C build
 }
 
