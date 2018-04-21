@@ -3,7 +3,7 @@
 # Maintainer: artoo <artoo@artixlinux.org>
 
 pkgname=artix-mirrorlist
-pkgver=20180417
+pkgver=20180421
 pkgrel=1
 pkgdesc="Artix mirror list for use by pacman"
 arch=('any')
