@@ -1,13 +1,13 @@
 # Maintainer: Muhammad Herdiansyah <koni@artixlinux.org>
 pkgname=halt
-pkgver=0.2
+pkgver=0.3
 pkgrel=1
 pkgdesc="Artix Linux's wrapper program for OpenRC and runit's shutdown scheme"
 arch=('x86_64')
 url="https://github.com/artix-linux/halt"
 license=('BSD')
 source=("$url/archive/$pkgver/$pkgname-$pkgver.tar.gz")
-sha256sums=('7c24f1cf7744092fae811c1160620263251d3aa0ec294b47a2c274fc290bdd77')
+sha256sums=('c0d71c789a1bec2d4f83a335c30d2c52ea58a2d1fbbf0e42c2b84387fcee354e')
 
 build() {
 	cd "$pkgname-$pkgver"
