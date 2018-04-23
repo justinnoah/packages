@@ -7,7 +7,7 @@ _url="https://github.com/OpenRC/openrc/archive"
 pkgbase=openrc
 pkgname=('openrc' 'openrc-bash-completions' 'openrc-zsh-completions')
 pkgver=0.35.5
-pkgrel=7
+pkgrel=8
 pkgdesc="Gentoo's universal init system"
 arch=('i686' 'x86_64' 'armv7h')
 url="http://www.gentoo.org/proj/en/base/openrc/"
@@ -19,6 +19,7 @@ source=("${pkgbase}-${pkgver}.tar.gz::${_url}/${pkgver}.tar.gz"
         'openrc-hook'
         'openrc-install.hook'
         'openrc-remove.hook'
+        'openrc-remove-pkg.hook'
         'sysctl.hook'
         'sysctl.conf')
 sha256sums=('502c14044ff587cbabc943e2fde1e4679cce0936c6d0eabd7a5d15609f6d9c72'
@@ -26,6 +27,7 @@ sha256sums=('502c14044ff587cbabc943e2fde1e4679cce0936c6d0eabd7a5d15609f6d9c72'
             'efc7bcb19bbaf11372d304006eb81e89c26ca5f2524f7d171f46ada97e6d6001'
             '385d16b3133b53c459a3910a739304cd009478e37b5550f4ce698f7deea774f0'
             'a636d63fa753420cfbcaf451f97f68897e98d471a6f516b8edc14f509e42c013'
+            '57964ffa78e525178645f50c2d3ad7dc55476ec37d2c517d606578ba1b17cb27'
             '9065d497c2bcde322154e177607ccf25f6a89582eada99fc6008cb379ae00bca'
             '4170bcf3655ff6fb32b35fc592a4294a64d25df98d2f0f09f467689ed1ad54ea')
 
@@ -38,7 +40,7 @@ _args=(
     MKPAM=pam
     MKTERMCAP=ncurses
     MKNET=no
-    MKSYSVINIT=yes
+    MKSYSVINIT=no
     MKBASHCOMP=yes
     MKZSHCOMP=yes
     MKPKGCONFIG=yes
@@ -118,9 +120,6 @@ package_openrc() {
     # split zsh completions
     install -d ${srcdir}/_zsh/usr/share/zsh/site-functions
     mv -v ${pkgdir}/usr/share/zsh/site-functions/* ${srcdir}/_zsh/usr/share/zsh/site-functions
-
-    # remove sysvinit-compatible symlinks
-    rm -f ${pkgdir}/usr/bin/{init,halt,poweroff,reboot,shutdown}
 }
 
 package_openrc-bash-completions() {
@@ -136,22 +135,3 @@ package_openrc-zsh-completions() {
 
     mv -v ${srcdir}/_zsh/* ${pkgdir}
 }
-
-# _split_sysvinitcompat(){
-#     # split sysvinit compat
-#     install -d ${srcdir}/_sysvinit_compat/usr/{lib/{openrc/bin,pkgconfig},bin,share/man/man8}
-#     mv -v ${pkgdir}/usr/lib/openrc/bin/{halt,poweroff,reboot,shutdown} ${srcdir}/_sysvinit_compat/usr/lib/openrc/bin
-#     mv -v ${pkgdir}/usr/bin/{openrc-init,openrc-shutdown,init,halt,poweroff,reboot,shutdown} ${srcdir}/_sysvinit_compat/usr/bin
-#     mv -v ${pkgdir}/usr/share/man/man8/{openrc-init,openrc-shutdown}.8 ${srcdir}/_sysvinit_compat/usr/share/man/man8
-#     mv -v ${pkgdir}/usr/lib/lib{einfo,rc}.so* ${srcdir}/_sysvinit_compat/usr/lib
-#     mv -v ${pkgdir}/usr/lib/pkgconfig/{einfo,openrc}.pc ${srcdir}/_sysvinit_compat/usr/lib/pkgconfig
-# }
-
-# package_openrc-sysvcompat(){
-#     pkgdesc="Openrc sysvinit compatibility"
-#     depends=('sh')
-#     conflicts=('sysvinit' 'systemd-sysvcompat')
-#     replaces=('sysvinit')
-#
-#     mv -v ${srcdir}/_sysvinit_compat/* ${pkgdir}
-# }
