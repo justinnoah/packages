@@ -2,7 +2,7 @@
 
 pkgname=runit-artix
 pkgver=20180414
-pkgrel=6
+pkgrel=7
 pkgdesc='Runit initscripts for Artix'
 provides=('runit-init')
 url='https://github.com/artix-linux/runit-artix/'
@@ -10,13 +10,12 @@ license=('custom:CC0')
 arch=('i686' 'x86_64')
 depends=('procps-ng' 'awk' 'runit' 'halt' 'sh' 'eudev' 'opentmpfiles')
 groups=('init')
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/runit-artix/archive/${pkgver}.tar.gz"
-        "runit-remove-pkg.hook")
+conflicts=('openrc')
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/runit-artix/archive/${pkgver}.tar.gz")
 backup=('etc/runit/rc.conf'
         'etc/runit/rc.local'
         'etc/runit/rc.shutdown')
-sha256sums=('0443b94ddb08a6ff395dd60b8c3f9ca71d2d26aec94f40704934467f4c7a3026'
-            'ca2a44d44904c2b9e07c53b7daba579500a5f79e441db250b26087a27de80e8e')
+sha256sums=('0443b94ddb08a6ff395dd60b8c3f9ca71d2d26aec94f40704934467f4c7a3026')
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
@@ -31,8 +30,4 @@ package() {
 	# License
 	mkdir -p "${pkgdir}"/usr/share/licenses/runit-artix
 	sed -n '/To the extent/,/0/p' README.md > "${pkgdir}"/usr/share/licenses/runit-artix/LICENSE
-
-	# Remove hook
-	mkdir -p "${pkgdir}"/usr/share/libalpm/hooks
-	install -m644 "${srcdir}"/runit-remove-pkg.hook "${pkgdir}"/usr/share/libalpm/hooks
 }
