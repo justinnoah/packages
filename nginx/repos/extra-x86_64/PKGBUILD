@@ -6,8 +6,8 @@
 # Contributor: Daniel Micay <danielmicay@gmail.com>
 
 pkgname=nginx
-pkgver=1.12.2
-pkgrel=2
+pkgver=1.14.0
+pkgrel=1
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server'
 arch=(x86_64)
 url='https://nginx.org'
@@ -15,7 +15,7 @@ license=(custom)
 depends=(pcre zlib openssl geoip mailcap)
 makedepends=(mercurial)
 checkdepends=(perl perl-gd perl-io-socket-ssl perl-fcgi perl-cache-memcached
-              memcached ffmpeg inetutils) 
+              memcached ffmpeg inetutils)
 backup=(etc/nginx/fastcgi.conf
         etc/nginx/fastcgi_params
         etc/nginx/koi-win
@@ -27,9 +27,11 @@ backup=(etc/nginx/fastcgi.conf
         etc/logrotate.d/nginx)
 install=nginx.install
 source=($url/download/nginx-$pkgver.tar.gz{,.asc}
+        hg+http://hg.nginx.org/nginx-tests#revision=d6daf03478ad
         logrotate)
 validpgpkeys=(B0F4253373F8F6F510D42178520A9993A1C052F8) # Maxim Dounin <mdounin@mdounin.ru>
-md5sums=('4d2fc76211435f029271f1cf6d7eeae3'
+md5sums=('2d856aca3dfe1d32e3c9f8c4cac0cc95'
+         'SKIP'
          'SKIP'
          '6a01fb17af86f03707c8ae60f98a2dc2')
 
@@ -91,6 +93,11 @@ build() {
     ${_stable_flags[@]}
 
   make
+}
+
+check() {
+  cd nginx-tests
+  TEST_NGINX_BINARY="$srcdir/$pkgname-$pkgver/objs/nginx" prove .
 }
 
 package() {
