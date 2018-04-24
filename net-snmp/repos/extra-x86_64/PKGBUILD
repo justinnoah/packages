@@ -4,24 +4,23 @@
 
 pkgname=net-snmp
 pkgver=5.7.3
-pkgrel=7.1
+pkgrel=8
 pkgdesc="A suite of applications used to implement SNMP v1, SNMP v2c and SNMP v3 using both IPv4 and IPv6"
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="http://www.net-snmp.org/"
 license=('BSD')
-depends=('openssl' 'libnl' 'pciutils')
+depends=('libnl' 'libnsl' 'openssl' 'pciutils')
 makedepends=('python2-setuptools')
 optdepends=('perl-term-readkey: for snmpcheck application'
             'perl-tk: for snmpcheck and tkmib applications'
             'python2: for the python modules')
 options=('!emptydirs' '!makeflags')
 source=(http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz{,.asc}
-         net-snmp-5.7.3-perl-5.24.patch
-         fix-openssl-build-errors.patch)
-sha1sums=('97dc25077257680815de44e34128d365c76bd839'
-          'SKIP'
-          '31beef2cb5ad9b4ac655f8ced53058ebf6e99ca9'
-          'b329ff700a3e20cdfcab4643a573ef976f9182c0')
+        net-snmp-5.7.3-perl-5.24.patch fix-openssl-build-errors.patch)
+sha512sums=('0758bba5844cfd6c80959ac16b83906a2f830ba49fd0ab1bf9e191dc6a79d312a2e4760bd53b3e1a1c82759481f0064d088d5a3cf475d84b25679a6bd0f049bb'
+            'SKIP'
+            'bf9ce238083f6a03cbb3080e584c9ca64060dee4e46ce62f35eccc877213e26340747de4cfdb7928dc7b95525865b68593ea82eb01b7971f3f3cacedac8c8136'
+            '66cad5a708615e428f2edd91cd1c9a9c2f1e6ce00f9cc3dbaa3a06b6bd1ce02dfa7a8eb3a02426713f8a9d327872f349d107e03440c942fd65bf4b13fc5df028')
 validpgpkeys=('8AAA779B597B405BBC329B6376CF47B8A77C5329'
               '27CAA4A32E371383A33ED0587D5F9576E0F81533')  # Net-SNMP Administrators
 
@@ -53,6 +52,7 @@ package() {
   cd ${pkgname}-${pkgver}
   sed -i -e "s:install --basedir=\$\$dir:install --basedir=\$\$dir --root=${pkgdir}:" Makefile
   make DESTDIR="${pkgdir}" INSTALL_PREFIX="${pkgdir}" INSTALLDIRS=vendor install
+
   install -D -m644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
 # template start; name=perl-binary-module-dependency; version=1;
