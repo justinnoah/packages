@@ -1,9 +1,10 @@
 # $Id$
 # Maintainer: Chris Cromer <cromer@artixlinux.org>
 # Maintainer: artoo <artoo@artixlinux.org>
+# Maintainer: Christos Nouskas <nous@artixlinux.org>
 
 pkgname=artix-mirrorlist
-pkgver=20180421
+pkgver=20180424
 pkgrel=1
 pkgdesc="Artix mirror list for use by pacman"
 arch=('any')
@@ -14,7 +15,7 @@ conflicts=('pacman-mirrorlist')
 replaces=('pacman-mirrorlist')
 backup=(etc/pacman.d/mirrorlist)
 source=(mirrorlist)
-sha256sums=('910cff711167d6c22e4d95f4b657ac2ab549c5d7b7d0d2614ad4ecc8ac0c4fb7')
+sha256sums=('d74d947aa74249d104ffac2500d14578fbabb29e9649fdb9144e5c6e50c7faea')
 
 package() {
   mkdir -p $pkgdir/etc/pacman.d
