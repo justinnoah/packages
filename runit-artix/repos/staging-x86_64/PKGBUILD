@@ -2,12 +2,12 @@
 
 pkgname=runit-artix
 pkgver=20180414
-pkgrel=8
+pkgrel=9
 pkgdesc='Runit initscripts for Artix'
 url='https://github.com/artix-linux/runit-artix/'
 license=('custom:CC0')
 arch=('i686' 'x86_64')
-depends=('procps-ng' 'awk' 'runit' 'halt' 'sh' 'eudev' 'opentmpfiles')
+depends=('procps-ng' 'awk' 'runit' 'sh' 'eudev' 'opentmpfiles')
 provides=('svc-manager')
 conflicts=('svc-manager')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/runit-artix/archive/${pkgver}.tar.gz")
