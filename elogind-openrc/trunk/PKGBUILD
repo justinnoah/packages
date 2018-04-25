@@ -4,7 +4,7 @@ _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=elogind-openrc
 pkgver=20180425
-pkgrel=2
+pkgrel=3
 pkgdesc="OpenRC elogind init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
@@ -34,4 +34,7 @@ _inst_confd(){
 package() {
     _inst_confd "elogind"
     _inst_initd "elogind"
+
+    install -d "${pkgdir}/etc/runlevels/boot"
+    ln -sf "/etc/init.d/elogind" "${pkgdir}/etc/runlevels/boot/elogind"
 }
