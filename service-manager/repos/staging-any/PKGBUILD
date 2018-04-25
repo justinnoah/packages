@@ -1,0 +1,12 @@
+# Maintainer: Muhammad Herdiansyah <koni@artixlinux.org>
+# Maintainer: artoo <artoo@artixlinux.org>
+
+pkgname=service-manager
+pkgver=0.1
+pkgrel=1
+pkgdesc="Artix Linux's service manager virtual"
+arch=('any')
+url="https://www.artixlinux.org"
+groups=('base')
+depends=('svc-manager')
+license=('GPL2')
