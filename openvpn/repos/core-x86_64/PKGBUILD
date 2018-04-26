@@ -2,20 +2,19 @@
 # Maintainer: Christian Hesse <mail@eworm.de>
 
 pkgname=openvpn
-pkgver=2.4.5
+pkgver=2.4.6
 pkgrel=1
 pkgdesc='An easy-to-use, robust and highly configurable VPN (Virtual Private Network)'
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url='http://openvpn.net/index.php/open-source.html'
 depends=('openssl' 'lzo' 'iproute2' 'libeudev' 'pkcs11-helper')
 optdepends=('easy-rsa: easy CA and certificate handling'
             'pam: authenticate via PAM')
 makedepends=('eudev')
 license=('custom')
-install=openvpn.install
 validpgpkeys=('F554A3687412CFFEBDEFE0A312F5F7B42F2B01E7') # OpenVPN - Security Mailing List <security@openvpn.net>
-source=("https://swupdate.openvpn.net/community/releases/openvpn-${pkgver}.tar.xz"{,.asc})
-sha256sums=('96cd1b8fe1e8cb2920f07c3fd3985faea756e16fdeebd11d3e146d5bd2b04a80'
+source=("https://swupdate.openvpn.net/community/releases/openvpn-${pkgver}.tar.gz"{,.asc})
+sha256sums=('738dbd37fcf8eb9382c53628db22258c41ba9550165519d9200e8bebaef4cbe2'
             'SKIP')
 
 build() {
@@ -63,3 +62,4 @@ package() {
     esac
   done
 }
+
