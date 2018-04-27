@@ -2,16 +2,14 @@
 
 pkgname=runit-artix
 pkgver=20180414
-pkgrel=4
+pkgrel=9
 pkgdesc='Runit initscripts for Artix'
-provides=('runit-init')
 url='https://github.com/artix-linux/runit-artix/'
 license=('custom:CC0')
 arch=('i686' 'x86_64')
 depends=('procps-ng' 'awk' 'runit' 'sh' 'eudev' 'opentmpfiles')
-groups=('init')
-conflicts=('openrc')
-install='runit-artix.install'
+provides=('svc-manager')
+conflicts=('svc-manager')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/artix-linux/runit-artix/archive/${pkgver}.tar.gz")
 backup=('etc/runit/rc.conf'
         'etc/runit/rc.local'
@@ -31,7 +29,4 @@ package() {
 	# License
 	mkdir -p "${pkgdir}"/usr/share/licenses/runit-artix
 	sed -n '/To the extent/,/0/p' README.md > "${pkgdir}"/usr/share/licenses/runit-artix/LICENSE
-
-	# init symlink
-	ln -s runit-init "${pkgdir}/usr/bin/init"
 }
