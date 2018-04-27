@@ -1,10 +1,10 @@
 [Trigger]
-Type = File
 Operation = Install
 Operation = Upgrade
 Operation = Remove
-Target = usr/bin/openrc-init
-Target = etc/runit/1
+Type = Package
+Target = openrc
+Target = runit-artix
 
 [Action]
 Description = Activating init switching system...
