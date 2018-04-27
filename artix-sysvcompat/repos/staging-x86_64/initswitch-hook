@@ -1,9 +1,13 @@
 #!/bin/sh -e
 
-if which /usr/bin/openrc-init; then
+if which /usr/bin/openrc-init &> /dev/null; then
     ln -sf "openrc-init" "/usr/bin/init"
     echo "	==> Activated OpenRC init."
-elif which /usr/bin/runit-init; then
+elif which /usr/bin/runit-init &> /dev/null; then
     ln -sf "runit-init" "/usr/bin/init"
     echo "	==> Activated runit init."
+else
+    echo "	==> No init present!"
+    echo "	Install either openrc or runit-artix"
+    echo "	or specify the init=<path_to_init> kernel parameter."
 fi
