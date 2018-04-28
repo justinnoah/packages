@@ -5,7 +5,7 @@ _pkgname=halt
 
 pkgname=artix-sysvcompat
 pkgver=0.3.7
-pkgrel=4
+pkgrel=5
 pkgdesc="Artix Linux's wrapper program for OpenRC and runit's init & shutdown scheme"
 arch=('x86_64')
 groups=('base')
@@ -14,29 +14,29 @@ depends=('svc-manager')
 conflicts=('sysvinit' 'systemd-sysvcompat')
 replaces=('sysvinit')
 license=('BSD')
-source=("$url/archive/$pkgver/$_pkgname-$pkgver.tar.gz"
+source=("$url/archive/${pkgver}/${_pkgname}-${pkgver}.tar.gz"
         'initswitch-hook'
         'initswitch.hook')
 sha256sums=('0b8ac1cfd75e76151ddbe2c0395ee8463c34b6e3c464922355cfb58818c98748'
-            'c341a7a29b2ddc0fe183953afc3f15712f8ba0d6158648959a27c86859cbcf65'
+            'b5cfd3903a98699b0421aba0a20b10d9ffdebc8ca58609329313528cc1bc3615'
             '77e1de9d1f9f5efa3614627389438ab20f28da4450911990a7a98294e61a8164')
 
 build() {
-	cd "$_pkgname-$pkgver"
+	cd "${_pkgname}-${pkgver}"
 	make
 }
 
 package() {
-	cd "$_pkgname-$pkgver"
-	make DESTDIR="$pkgdir" install
+	cd "${_pkgname}-${pkgver}"
+	make DESTDIR="${pkgdir}" install
 
-	install -Dm644 "COPYING" "$pkgdir/usr/share/licenses/halt/COPYING"
+	install -Dm644 "COPYING" "${pkgdir}/usr/share/licenses/halt/COPYING"
 
 	# pacman hooks
-    install -Dm755 ${srcdir}/initswitch-hook "$pkgdir"/usr/share/libalpm/scripts/initswitch-hook
-    install -Dm644 -t "$pkgdir"/usr/share/libalpm/hooks ${srcdir}/*.hook
+    install -Dm755 ${srcdir}/initswitch-hook "${pkgdir}"/usr/share/libalpm/scripts/initswitch-hook
+    install -Dm644 -t "${pkgdir}"/usr/share/libalpm/hooks ${srcdir}/*.hook
 
     # provide default symlink for PM file tracking
-    install -d "$pkgdir/usr/bin"
-    ln -sf /usr/bin/openrc-init ${pkgdir}/usr/bin/init
+    install -d "${pkgdir}"/usr/bin
+    ln -sf openrc-init "${pkgdir}"/usr/bin/init
 }

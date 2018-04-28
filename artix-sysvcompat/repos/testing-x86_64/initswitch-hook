@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
 while read -r f; do
-    ln -sf "/$f" "/usr/bin/init"
+    ln -sf "$(basename "$f")" "/usr/bin/init"
     echo "	==> Activated $(basename "$f")."
 done
