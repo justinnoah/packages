@@ -2,11 +2,12 @@
 Operation = Install
 Operation = Upgrade
 Operation = Remove
-Type = Package
-Target = openrc
-Target = runit-artix
+Type = File
+Target = usr/bin/openrc-init
+Target = usr/bin/runit-init
 
 [Action]
 Description = Activating init switching system...
 When = PostTransaction
 Exec = /usr/share/libalpm/scripts/initswitch-hook
+NeedsTargets
