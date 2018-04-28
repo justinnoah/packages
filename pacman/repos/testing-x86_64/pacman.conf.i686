@@ -43,8 +43,8 @@ LocalFileSigLevel = Optional
 #RemoteFileSigLevel = Required
 
 # NOTE: You must run `pacman-key --init` before first using pacman; the local
-# keyring can then be populated with the keys of all official Cromnix
-# packagers with `pacman-key --populate archlinux cromnix`.
+# keyring can then be populated with the keys of all official Artix Linux
+# packagers with `pacman-key --populate archlinux artix`.
 
 #
 # REPOSITORIES
@@ -89,6 +89,10 @@ Include = /etc/pacman.d/mirrorlist
 #[custom]
 #SigLevel = Optional TrustAll
 #Server = file:///home/custompkgs
+
+#
+# ARCHLINUX
+#
 
 #[testing]
 #Include = /etc/pacman.d/mirrorlist-arch
