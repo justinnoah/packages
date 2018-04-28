@@ -3,13 +3,12 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=kmod-openrc
-pkgver=20180425
+pkgver=20180428
 pkgrel=1
 pkgdesc="OpenRC kmod init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
-groups=('openrc-system')
 depends=('kmod')
 conflicts=('systemd-sysvcompat')
 source=('kmod-static-nodes.initd')
