@@ -3,7 +3,7 @@
 
 pkgname=gcr
 pkgver=3.28.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A library for bits of crypto UI and parsing"
 url="https://git.gnome.org/browse/gcr"
 arch=(x86_64)
@@ -24,6 +24,7 @@ pkgver() {
 
 prepare() {
   cd $pkgname
+
   sed -i '1s/python$/&2/' build/tap-{driver,gtester}
   NOCONFIGURE=1 ./autogen.sh
 }
