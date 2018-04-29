@@ -9,9 +9,9 @@ init_conf(){
 
 init_detect(){
     local init
-    if which /usr/bin/openrc-init &> /dev/null;then
+    if [[ -f /usr/bin/openrc-init ]];then
         init=openrc-init
-    elif which /usr/bin/runit-init &> /dev/null;then
+    elif [[ -f /usr/bin/runit-init ]];then
         init=runit-init
     fi
     if [[ -n "$init" ]];then
