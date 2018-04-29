@@ -4,14 +4,15 @@ _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 
 pkgname=device-mapper-openrc
-pkgver=20180428
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC device-mapper init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
+provides=('init-device-mapper')
 depends=('device-mapper' 'openrc')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-device-mapper')
 backup=('etc/conf.d/device-mapper')
 source=("device-mapper.confd::${_url}/sys-fs/lvm2/files/device-mapper.conf-1.02.22-r3"
         "device-mapper.initd::${_url}/sys-fs/lvm2/files/device-mapper.rc-2.02.105-r2"
