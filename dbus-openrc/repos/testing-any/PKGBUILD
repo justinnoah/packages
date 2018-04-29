@@ -3,14 +3,15 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=dbus-openrc
-pkgver=20180428
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC dbus init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
+provides=('init-dbus')
 depends=('dbus')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-dbus')
 source=("dbus.initd::${_url}/sys-apps/dbus/files/dbus.initd-r1")
 sha256sums=('00a1a8f254d4f40b6f98a2777809b9c45ad81c4aeb4c0592793dd839777990bd')
 
