@@ -6,14 +6,14 @@ _pkgname=runit-artix
 
 pkgname=runit
 pkgver=2.1.2
-pkgrel=4
+pkgrel=5
 pkgdesc='runit is a cross-platform Unix init scheme with service supervision'
 arch=('x86_64')
 url='http://smarden.org/runit/'
 license=('BSD3')
-depends=('procps-ng' 'awk' 'bash' 'dbus-runit' 'elogind-runit' 'opentmpfiles')
+depends=('procps-ng' 'awk' 'bash' 'elogind-runit' 'opentmpfiles')
 optdepends=('runit-doc: documentation')
-provides=('svc-manager')
+provides=('svc-manager' 'runit-artix')
 conflicts=('svc-manager' 'runit-artix')
 replaces=('runit-artix')
 backup=('etc/runit/rc.conf'
