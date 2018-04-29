@@ -5,7 +5,7 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=cronie-runit
-pkgver=20180229
+pkgver=20180429
 pkgrel=1
 pkgdesc="runit service scripts for cronie"
 arch=('any')
