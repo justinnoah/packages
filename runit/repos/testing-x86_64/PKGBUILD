@@ -1,18 +1,17 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
-_artix_url=https://github.com/artix-linux/runit-artix
+_url=https://github.com/artix-linux/runit-artix
 _pkgver=20180414
 _pkgname=runit-artix
 
 pkgname=runit
 pkgver=2.1.2
-pkgrel=5
+pkgrel=6
 pkgdesc='runit is a cross-platform Unix init scheme with service supervision'
 arch=('x86_64')
 url='http://smarden.org/runit/'
 license=('BSD3')
 depends=('procps-ng' 'awk' 'bash' 'elogind-runit' 'opentmpfiles')
-optdepends=('runit-doc: documentation')
 provides=('svc-manager' 'runit-artix')
 conflicts=('svc-manager' 'runit-artix')
 replaces=('runit-artix')
@@ -20,7 +19,7 @@ backup=('etc/runit/rc.conf'
         'etc/runit/rc.local'
         'etc/runit/rc.shutdown')
 source=("http://smarden.org/${pkgname}/${pkgname}-${pkgver}.tar.gz"
-        "${_pkgname}-${_pkgver}.tar.gz::${_artix_url}/archive/${_pkgver}.tar.gz"
+        "${_pkgname}-${_pkgver}.tar.gz::${_url}/archive/${_pkgver}.tar.gz"
         "clearmem.patch"
         "svlogd.patch"
         "utmpset-time_t.patch")
