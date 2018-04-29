@@ -1,13 +1,12 @@
 [Trigger]
 Operation = Install
 Operation = Upgrade
-Operation = Remove
 Type = File
 Target = usr/bin/openrc-init
 Target = usr/bin/runit-init
 
 [Action]
-Description = Activating init switching system...
+Description = Setting init symlink ...
 When = PostTransaction
-Exec = /usr/share/libalpm/scripts/initswitch-hook
+Exec = /usr/share/libalpm/scripts/initswitch-hook upd
 NeedsTargets

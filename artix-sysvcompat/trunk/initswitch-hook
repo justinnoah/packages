@@ -1,6 +1,13 @@
 #!/bin/sh -e
 
-while read -r f; do
-    ln -sf "$(basename "$f")" "/usr/bin/init"
-    echo "	==> Activated $(basename "$f")."
-done
+init_conf(){
+    while read -r f; do
+        ln -sf "$(basename "$f")" "/usr/bin/init"
+        echo "	==> Activated $(basename "$f")"
+    done
+}
+
+case $1 in
+    upd) init_conf ;;
+    *) echo >&2 "  Invalid operation '$1'"; exit 1 ;;
+esac
