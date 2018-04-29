@@ -5,7 +5,7 @@ _pkgname=halt
 
 pkgname=artix-sysvcompat
 pkgver=0.3.7
-pkgrel=7
+pkgrel=8
 pkgdesc="Artix Linux's wrapper program for OpenRC and runit's init & shutdown scheme"
 arch=('x86_64')
 groups=('base')
@@ -16,12 +16,12 @@ replaces=('sysvinit')
 license=('BSD')
 source=("$url/archive/${pkgver}/${_pkgname}-${pkgver}.tar.gz"
         'initswitch-hook'
-        'initswitch.hook'
-        'sysvcompat.hook')
+        '50-initswitch.hook'
+        '55-sysvcompat.hook')
 sha256sums=('0b8ac1cfd75e76151ddbe2c0395ee8463c34b6e3c464922355cfb58818c98748'
-            'babe3a338cb4876b9cfe15737b2a756e7da6da2a0f7b13420e68a798ee113bf8'
+            '2552b86278938344ea3076fd837990c4aefcc46fdaf262d199c43bb1136054fb'
             'd96bc4b6723e1597281557a42936162c158ced63574d60856bfb387056a00f87'
-            'ba9699ebbc72f9e93c062bfb3fe9f8213f8912ae66f1334f6ea5943115a72dd3')
+            '20d1e1170e6b2bfdb5b895cabc792e87f87abfdcaccc9f73a2dd6429aa0e3591')
 
 build() {
 	cd "${_pkgname}-${pkgver}"

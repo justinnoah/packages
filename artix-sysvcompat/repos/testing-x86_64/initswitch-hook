@@ -9,13 +9,15 @@ init_conf(){
 
 init_detect(){
     local init
-    if which usr/bin/openrc-init &> /dev/null;then
+    if which /usr/bin/openrc-init &> /dev/null;then
         init=openrc-init
-    elif which usr/bin/runit-init &> /dev/null;then
+    elif which /usr/bin/runit-init &> /dev/null;then
         init=runit-init
     fi
-    echo "	==> Detected $init"
-    ln -sf "$init" "/usr/bin/init"
+    if [[ -n "$init" ]];then
+        echo "	==> Found $init"
+        ln -sf "$init" "/usr/bin/init"
+    fi
 }
 
 case $1 in

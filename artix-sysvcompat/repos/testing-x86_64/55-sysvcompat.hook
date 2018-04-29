@@ -5,7 +5,7 @@ Type = Package
 Target = artix-sysvcompat
 
 [Action]
-Description = Setting init symlink ...
+Description = Detecting init ...
 When = PostTransaction
 Exec = /usr/share/libalpm/scripts/initswitch-hook detect
 NeedsTargets
