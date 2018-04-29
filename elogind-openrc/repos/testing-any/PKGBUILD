@@ -3,14 +3,15 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=elogind-openrc
-pkgver=20180428
-pkgrel=2
+pkgver=20180429
+pkgrel=1
 pkgdesc="OpenRC elogind init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
+provides=('init-elogind')
 depends=('elogind' 'dbus-openrc')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-elogind')
 source=("elogind.confd::${_url}/sys-auth/elogind/files/elogind.conf.in"
         "elogind.initd::${_url}/sys-auth/elogind/files/elogind.init")
 sha256sums=('ed2b6b9c659d7661cba043fefe38aa5c7d7c910fc50060c6a4be0ef5b75b7376'
