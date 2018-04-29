@@ -6,13 +6,14 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=dbus-runit
 pkgver=20180429
-pkgrel=2
+pkgrel=3
 pkgdesc="runit service scripts for dbus"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
 depends=('dbus')
-provides=('dbus-runscripts')
+provides=('dbus-runscripts' 'init-dbus')
+conflicts=('init-dbus')
 replaces=('dbus-runscripts')
 source=("dbus.run")
 sha256sums=('68b377243a3fcf3639ad7f2df1d97f1ef6f21bdf99567c6d34254f5e90428675')
