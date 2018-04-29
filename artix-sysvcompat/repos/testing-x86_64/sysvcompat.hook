@@ -1,12 +1,11 @@
 [Trigger]
 Operation = Install
 Operation = Upgrade
-Type = File
-Target = usr/bin/openrc-init
-Target = usr/bin/runit-init
+Type = Package
+Target = artix-sysvcompat
 
 [Action]
 Description = Setting init symlink ...
 When = PostTransaction
-Exec = /usr/share/libalpm/scripts/initswitch-hook update
+Exec = /usr/share/libalpm/scripts/initswitch-hook detect
 NeedsTargets

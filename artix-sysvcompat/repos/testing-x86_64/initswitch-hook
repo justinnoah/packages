@@ -7,7 +7,19 @@ init_conf(){
     done
 }
 
+init_detect(){
+    local init
+    if which usr/bin/openrc-init &> /dev/null;then
+        init=openrc-init
+    elif which usr/bin/runit-init &> /dev/null;then
+        init=runit-init
+    fi
+    echo "	==> Detected $init"
+    ln -sf "$init" "/usr/bin/init"
+}
+
 case $1 in
-    upd) init_conf ;;
+    update) init_conf ;;
+    detect) init_detect ;;
     *) echo >&2 "  Invalid operation '$1'"; exit 1 ;;
 esac
