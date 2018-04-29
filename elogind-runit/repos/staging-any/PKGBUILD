@@ -6,12 +6,11 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=elogind-runit
 pkgver=20180429
-pkgrel=1
+pkgrel=2
 pkgdesc="runit service scripts for elogind"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
-groups=('runit-system')
 depends=('elogind' 'dbus-runit')
 provides=('elogind-runscripts')
 replaces=('elogind-runscripts')
