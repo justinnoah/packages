@@ -3,21 +3,15 @@
 _url="http://dev.gentoo.org/~williamh/dist"
 _pkgname=udev-init-scripts
 
-_sed_args=(-e "s|/bin/udevadm|/usr/bin/udevadm|g" -e "s|/sbin/udevd|/usr/bin/udevd|g")
-_sed_args+=(-e 's|#!/sbin/openrc-run|#!/usr/bin/openrc-run|g')
-
 pkgname=eudev-openrc
 pkgver=32
-pkgrel=4
+pkgrel=5
 pkgdesc="OpenRC eudev startup scripts"
 arch=('any')
-url="https://github.com/cromnix/artix"
+url="https://github.com/artix-linux/packages"
 license=('GPL2')
-# groups=('base')
-provides=('udev-openrc')
 depends=('kmod-openrc' 'eudev')
-conflicts=('systemd-sysvcompat' 'udev-openrc')
-replaces=('udev-openrc')
+conflicts=('systemd-sysvcompat')
 source=("${_url}/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('d5ae437291ae140194f67fec2c9a6ceeda39708433840e7b4b0361cc5ae53eaa')
 
@@ -26,7 +20,10 @@ package(){
     make DESTDIR="${pkgdir}" install
 
     for f in ${pkgdir}/etc/init.d/*;do
-        sed ${_sed_args[@]} -i "$f"
+        sed -e "s|/bin/udevadm|/usr/bin/udevadm|g" \
+            -e "s|/sbin/udevd|/usr/bin/udevd|g" \
+            -e 's|#!/sbin/openrc-run|#!/usr/bin/openrc-run|g' \
+            -i "$f"
     done
 
     install -d "${pkgdir}/etc/runlevels/sysinit"
