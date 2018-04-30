@@ -4,15 +4,16 @@ _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 
 pkgname=mdadm-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC mdadm init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-mdadm')
 depends=('openrc' 'mdadm')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-mdadm')
 backup=('etc/conf.d/mdadm')
 source=("mdadm.confd::${_url}/sys-fs/mdadm/files/mdadm.confd"
         "mdadm.initd::${_url}/sys-fs/mdadm/files/mdadm.rc"
