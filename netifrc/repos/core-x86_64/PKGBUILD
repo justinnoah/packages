@@ -1,4 +1,4 @@
-# Maintainer: artoo <artoo@cromnix.org>
+# Maintainer: artoo <artoo@artixlinux.org>
 # Contributor: williamh <williamh@gentoo.org>
 
 _url="https://github.com"
@@ -10,14 +10,12 @@ _func_ver=0.12
 
 pkgname=netifrc
 pkgver=0.6.0
-pkgrel=1
+pkgrel=3
 pkgdesc="Gentoo Network Interface Management Scripts"
 arch=('x86_64')
 url="http://www.gentoo.org/proj/en/base/openrc/"
 license=('BSD2')
-groups=('base')
 depends=('eudev-openrc')
-install=${pkgname}.install
 backup=('etc/conf.d/net')
 source=("${pkgname}-${pkgver}.tar.gz::${_net_url}/${pkgver}.tar.gz"
         "gentoo-functions-${_func_ver}.tar.gz::${_func_url}/${_func_ver}.tar.gz")
