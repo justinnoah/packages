@@ -3,15 +3,16 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=xinetd-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC xinetd init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-xinetd')
 depends=('openrc' 'xinetd')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-xinetd')
 backup=('etc/conf.d/xinetd')
 source=("xinetd.confd::${_url}/sys-apps/xinetd/files/xinetd.confd"
         "xinetd.initd::${_url}/sys-apps/xinetd/files/xinetd.rc6")
