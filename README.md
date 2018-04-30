@@ -3,7 +3,7 @@ Artix system and world packages
 
 ### Notes for maintainers
 
-The packages git follows the archlinux svn structure. It contains both `[core]` and `[extra]` PKGBUILDs, `[system]` and `[world]` in Artix respectively. Packages from `[community]` are accommodated in the `packages-galaxy` git tree.
+The packages git follows the archlinux svn structure. It contains both _core_ and _extra_ PKGBUILDs, _system_ and _world_ in Artix respectively. Packages from _community_ are accommodated in the `packages-galaxy` git tree.
 
 Each package directory consists of a trunk and repos subdirectories. Artix packages get updated from upstream Arch in trunk (using `buildtree -s`) and any necessary modifications are performed there. Once done, the maintainer can commit/push the updated package into its destination repo and only then the build server will pick up the update and attempt to build the package (i.e. as long as the changes remain in trunk, nothing leaves the room). It's recommended to copy `/etc/artools/artools.conf` to `~/.config/artools/artools.conf` and set the _workspace_dir_ option to a place with a few spare GBs of space.
 
@@ -36,11 +36,11 @@ The most interesting option is `-c`. It compares Arch and Artix package versions
     buildtree -cu
     buildtree -cd
 
-To compare Arch and Artix versions in `[gremlins]/[goblins] - [testing]/[staging]`, use `-a`:
+To compare Arch and Artix versions in _gremlins]/[goblins] - [testing]/[staging_, use `-a`:
 
     buildtree -ca
 
-Note, the above check will use the Artix repos as a base, not Arch's. For example, if `foo` is in Artix/`[galaxy]` and Arch/`[community-testing]`, it won't show up in the list.
+Note, the above check will use the Artix repos as a base, not Arch's. For example, if `foo` is in Artix/_galaxy_ and Arch/_community-testing_, it won't show up in the list.
 
 Now, suppose we saw a shiny package named `foo` in Arch which unfortunately is compiled against _libsystemd.so_ and we want to import it into our repos for proper treatment. We issue:
 
@@ -76,15 +76,15 @@ The symlinks above call `commitpkg` which copies the contents of _packages/foo/t
 
 #### Some examples
 
-###### After we've imported `foo` from Arch, we want to put it in `[testing]` (i.e. `[gremlins]`). So, we release it from trunk into repos/testing and push (in this case `-s trunk` can be ommitted, as `-s` defaults to _trunk_):
+###### After we've imported `foo` from Arch, we want to put it in _testing_ (i.e. _gremlins_). So, we release it from trunk into repos/testing and push (in this case `-s trunk` can be ommitted, as `-s` defaults to _trunk_):
 
     testingpkg -p foo -s trunk -u
 
-###### Once `foo` has been tested to kingdom come, we decide to move it from `[testing]` to `[core]`:
+###### Once `foo` has been tested to kingdom come, we decide to move it from _testing_ to _core_:
 
     corepkg -p foo -s testing -u
 
-The build server will move `foo` from `[gremlins]` to `[system]`.
+The build server will move `foo` from _gremlins_ to _system_.
 
 ###### Release package 'foo2' from trunk into repos/staging and push (again, `-s trunk` can be ommitted):
 
@@ -106,7 +106,7 @@ The build server will move `foo` from `[gremlins]` to `[system]`.
 
     multilibpkg -p foo4 -s multilib-testing -u
 
-##### All packages in `[system]` **must** go through **[gremlins]** first!
+##### All packages in _system_ **must** go through _[gremlins]_ first!
 
 ##### The jenkins pipeline (in the build server) will not trigger any action on the server, if only trunk has been modified, commited and pushed. To trigger a build the change **must** be copied over to _repos_ with the appropriate `commitpkg` symlink (e.g. `corepkg`) and the PKGBUILD pkgver must match the one in trunk, because that's where the pipeline gets the package version from.
 
