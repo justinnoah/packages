@@ -3,7 +3,7 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=iptables-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC iptables init script"
 arch=('any')
@@ -11,7 +11,8 @@ url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
 depends=('openrc' 'iptables')
-conflicts=('systemd-sysvcompat')
+provides=('init-iptables')
+conflicts=('init-iptables')
 backup=('etc/conf.d/iptables'
         'etc/conf.d/ip6tables')
 source=("iptables.confd::${_url}/net-firewall/iptables/files/iptables-1.4.13.confd"
