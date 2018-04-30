@@ -7,7 +7,7 @@ pkgname=('artix-live-base'
 	'artix-live-portable-efi'
 	'artix-live-runit')
 pkgver=0.5.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Artix live session'
 arch=('any')
 url="https://github.com/artix-linux/live-services"
@@ -46,7 +46,7 @@ package_artix-live-portable-efi() {
 
 package_artix-live-runit() {
     pkgdesc='Artix live runit init scripts'
-    depends=('runit-artix' 'artix-live-base')
+    depends=('runit' 'artix-live-base')
 
     cd ${pkgbase}-${pkgver}
     make PREFIX=/usr SYSCONFDIR=/etc DESTDIR=${pkgdir} install_runit
