@@ -5,15 +5,16 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=lvm2-runit
-pkgver=20180226
+pkgver=20180429
 pkgrel=1
 pkgdesc="runit service scripts for lvm2"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
 groups=('runit-system')
-depends=('lvm2')
-provides=('lvm2-runscripts')
+depends=('lvm2' 'runit')
+provides=('lvm2-runscripts' 'init-lvm2')
+conflicts=('init-lvm2')
 replaces=('lvm2-runscripts')
 source=("lvmetad.run::${_url}/lvm2/files/lvmetad/run")
 
