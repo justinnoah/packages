@@ -3,14 +3,14 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=bluez-openrc
-pkgver=20180221
+pkgver=20180428
 pkgrel=1
 pkgdesc="OpenRC bluez init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-world')
-depends=('bluez' 'dbus-openrc')
+depends=('bluez' 'openrc')
 conflicts=('systemd-sysvcompat')
 source=("rfcomm.initd::${_url}/net-wireless/bluez/files/rfcomm-init.d-r2"
         "bluetooth.initd::${_url}/net-wireless/bluez/files/bluetooth-init.d-r4")
