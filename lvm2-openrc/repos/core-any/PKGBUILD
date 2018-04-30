@@ -3,15 +3,16 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=lvm2-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC lvm2 init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-lvm2')
 depends=('device-mapper-openrc' 'lvm2')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-lvm2')
 backup=('etc/conf.d/lvm')
 source=("lvm.confd::${_url}/sys-fs/lvm2/files/lvm.confd-2.02.28-r2"
         "lvm.initd::${_url}/sys-fs/lvm2/files/lvm.rc-2.02.172"
