@@ -3,15 +3,16 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=openldap-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC openldap init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-openldap')
 depends=('openrc' 'openldap')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-openldap')
 backup=('etc/conf.d/slapd')
 source=("slapd.confd::${_url}/net-nds/openldap/files/slapd-confd-2.4.28-r1"
         "slapd.initd::${_url}/net-nds/openldap/files/slapd-initd-2.4.40-r2")
