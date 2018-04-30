@@ -3,15 +3,16 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=openssh-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC openssh init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-openssh')
 depends=('openrc' 'openssh')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-openssh')
 backup=('etc/conf.d/sshd')
 source=("sshd.confd::${_url}/net-misc/openssh/files/sshd.confd"
         "sshd.initd::${_url}/net-misc/openssh/files/sshd.rc6.4")
