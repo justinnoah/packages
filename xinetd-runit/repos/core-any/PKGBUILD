@@ -5,17 +5,17 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=xinetd-runit
-pkgver=20180226
+pkgver=20180429
 pkgrel=1
 pkgdesc="runit service scripts for xinetd"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
 groups=('runit-system')
-depends=('xinetd')
-provides=('xinetd-runscripts')
+depends=('xinetd' 'runit')
+provides=('xinetd-runscripts' 'init-xinetd')
 replaces=('xinetd-runscripts')
-conflicts=('fcron' 'fcron-runit' 'systemd-sysvcompat')
+conflicts=('init-xinetd')
 source=("xinetd.run::${_url}/xinetd/files/xinetd/run")
 sha256sums=('abade658564cfb5f7ed9d343be80a33195df632e82577a6574b45804ab9b7b5b')
 
