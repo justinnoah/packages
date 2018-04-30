@@ -1,16 +1,15 @@
 # packages
 Artix system and world packages
 
-### Maintainers
+### Notes for maintainers
 
-The packages git follows the archlinux svn structure.
-It contains both core and extra PKGBUILD
+The packages git follows the archlinux svn structure. It contains both `[core]` and `[extra]` PKGBUILDs, `[system]` and `[world]` in Artix respectively. Packages from `[community]` are accommodated in the `packages-galaxy` git tree.
 
-Each package folder consists of a trunk and repos directory
-The package will always be updated in trunk, and then based on trunk action taken in the repos directory.
+Each package directory consists of a trunk and repos subdirectories. Artix packages get updated from upstream Arch in trunk (using `buildtree -s`) and any necessary modifications are performed there. Once done, the maintainer can commit/push the updated package into its destination repo and only then the build server will pick up the update and attempt to build the package (i.e. as long as the changes remain in trunk, nothing leaves the room). It's recommended to copy `/etc/artools/artools.conf` to `~/.config/artools/artools.conf` and set the _workspace_dir_ option to a place with a few spare GBs of space.
 
+Here's an overview of `buildtree`:
 ~~~
-$ buildtree -h
+% buildtree -h
 Usage: buildtree [options]
     -p <pkg>      Package name
     -s            Clone or pull repos
@@ -28,30 +27,26 @@ Usage: buildtree [options]
 ~~~
 
 
-To sync(clone or pull) the arch and artix git repos, run
+To sync (clone or pull) the Arch and Artix git repos (use `-sz` to only sync Artix git):
 
     buildtree -s
 
-To compare arch and artix repo versions, check updates, run
+The most interesting option is `-c`. It compares Arch and Artix package versions, combined with `-u` for upgrades and `-d` for downgrades (i.e. shows which packages are newer or older upstream):
 
     buildtree -cu
-
-To compare arch and artix repo versions, check downgrades, run
-
     buildtree -cd
 
-To compare arch and artix repo versions, check for package move, run
+To compare Arch and Artix versions in `[gremlins]/[goblins] - [testing]/[staging]`, use `-a`:
 
     buildtree -ca
 
-It will show a version comparison table between arch repos and artix repos.
-The first repository column shows the archlinux repos the package is in.
+Note, the above check will use the Artix repos as a base, not Arch's. For example, if `foo` is in Artix/`[galaxy]` and Arch/`[community-testing]`, it won't show up in the list.
 
-To import package 'foo' from arch packages into artix foo/trunk, run
+Now, suppose we saw a shiny package named `foo` in Arch which unfortunately is compiled against _libsystemd.so_ and we want to import it into our repos for proper treatment. We issue:
 
     buildtree -p foo -i
 
-In order to manage packages in the git tree, commitpkg standardizes the actions with descriptive commit messages.
+which imports `foo` in _$workspace_dir/artix/packages/foo/trunk_. Now we can edit the source files and/or the PKGBUILD to our liking. Once we're done, we'll need to commit the changes back to the git tree using `commitpkg`, which standardizes the actions with descriptive commit messages. Keep in mind, `commitpkg` by default updates the trunk; in order to copy the package into an active repo (and inform the build server about it), we must use the appropriate `commitpkg` symlink, as explained below. First, an overview of `commitpkg`:
 
 ~~~
 $ commitpkg -h
@@ -77,39 +72,43 @@ Usage: commitpkg [options]
 - multilib-testingpkg 
 - multilib-stagingpkg
 
+The symlinks above call `commitpkg` which copies the contents of _packages/foo/trunk_ into _packages/foo/repos/$destination_repo/_. Note the use of Arch repo names in the symlinks; this is intentional because it makes it easier to maintain `artools`.
 
-#### Examples
+#### Some examples
 
-release package 'foo' from trunk into repos/testing-x86_64 and push
+###### After we've imported `foo` from Arch, we want to put it in `[testing]` (i.e. `[gremlins]`). So, we release it from trunk into repos/testing and push (in this case `-s trunk` can be ommitted, as `-s` defaults to _trunk_):
 
     testingpkg -p foo -s trunk -u
 
-move package 'foo' from repos/testing-x86_64 to repos/core-x86_64 and push
+###### Once `foo` has been tested to kingdom come, we decide to move it from `[testing]` to `[core]`:
 
     corepkg -p foo -s testing -u
 
-release package 'foo2' from trunk into repos/staging-any and push
+The build server will move `foo` from `[gremlins]` to `[system]`.
+
+###### Release package 'foo2' from trunk into repos/staging and push (again, `-s trunk` can be ommitted):
 
     stagingpkg -p foo2 -s trunk -u
 
-move packages 'foo2' from repos/staging-any to repos/testing-any and push
+###### Move packages 'foo2' from repos/staging to repos/testing and push:
 
     testingpkg -p foo2 -s staging -u
 
-release package 'foo3' from trunk to repos/community-x86_64 and push
+###### Release package 'foo3' from trunk to repos/community and push (yes, `-s trunk` can be ommitted):
 
     communitypkg -p foo3 -s trunk -u
 
-release package 'foo4' from trunk to repos/multilib-testing-x86_64 and push
+###### Release package 'foo4' from trunk to repos/multilib-testing and push (in case you're still wondering, `-s trunk` can be ommitted):
 
     multilib-testingpkg -p foo4 -s trunk -u
 
-move packages 'foo4' from repos/multilib-testing-x86_64 to repos/multilib-x86_64 and push
+###### Move packages 'foo4' from repos/multilib-testing to repos/multilib and push
 
     multilibpkg -p foo4 -s multilib-testing -u
 
+##### All packages in `[system]` **must** go through **[gremlins]** first!
 
-##### The jenkins pipeline will not trigger any action on the server, if only trunk has been modified, commited and pushed.
+##### The jenkins pipeline (in the build server) will not trigger any action on the server, if only trunk has been modified, commited and pushed. To trigger a build the change **must** be copied over to _repos_ with the appropriate `commitpkg` symlink (e.g. `corepkg`) and the PKGBUILD pkgver must match the one in trunk, because that's where the pipeline gets the package version from.
 
 * Jenkinsfile stages
     * Checkout
