@@ -3,15 +3,16 @@
 _url="https://raw.githubusercontent.com/gentoo/gentoo/master"
 
 pkgname=nfs-utils-openrc
-pkgver=20180216
+pkgver=20180429
 pkgrel=1
 pkgdesc="OpenRC nfs-utils init script"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 groups=('openrc-system')
+provides=('init-nfs-utils')
 depends=('nfs-utils' 'rpcbind-openrc' 'device-mapper-openrc')
-conflicts=('systemd-sysvcompat')
+conflicts=('init-nfs-utils')
 backup=('etc/conf.d/nfs'
         'etc/conf.d/nfsclient')
 source=("nfs.confd::${_url}/net-fs/nfs-utils/files/nfs.confd"
