@@ -5,7 +5,7 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=nfs-utils-runit
-pkgver=20180226
+pkgver=20180429
 pkgrel=1
 pkgdesc="runit service scripts for nfs-utils"
 arch=('any')
@@ -13,7 +13,8 @@ url="https://github.com/artix-linux"
 license=('BSD3')
 groups=('runit-system')
 depends=('nfs-utils' 'rpcbind-runit' 'device-mapper-runit')
-provides=('nfs-utils-runscripts')
+provides=('nfs-utils-runscripts' 'init-nfs-utils')
+conflicts=('init-nfs-utils')
 replaces=('nfs-utils-runscripts')
 source=("nfs-server.run::${_url}/nfs-utils/files/nfs-server/run"
         "nfs-server.finish::${_url}/nfs-utils/files/nfs-server/finish"
