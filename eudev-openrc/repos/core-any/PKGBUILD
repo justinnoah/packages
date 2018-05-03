@@ -5,13 +5,14 @@ _pkgname=udev-init-scripts
 
 pkgname=eudev-openrc
 pkgver=32
-pkgrel=5
+pkgrel=6
 pkgdesc="OpenRC eudev startup scripts"
 arch=('any')
 url="https://github.com/artix-linux/packages"
 license=('GPL2')
 depends=('kmod-openrc' 'eudev')
-conflicts=('systemd-sysvcompat')
+provides=('init-udev')
+conflicts=('init-udev')
 source=("${_url}/${_pkgname}-${pkgver}.tar.gz")
 sha256sums=('d5ae437291ae140194f67fec2c9a6ceeda39708433840e7b4b0361cc5ae53eaa')
 
