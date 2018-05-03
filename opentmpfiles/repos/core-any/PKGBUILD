@@ -4,7 +4,7 @@
 pkgbase=opentmpfiles
 pkgname=(opentmpfiles opentmpfiles-openrc)
 pkgver=0.1.3
-pkgrel=8
+pkgrel=9
 pkgdesc="A standalone utility for handling systemd-style tmpfiles.d settings"
 arch=('any')
 url="https://github.com/OpenRC/opentmpfiles"
@@ -37,6 +37,8 @@ package_opentmpfiles() {
 package_opentmpfiles-openrc(){
     pkgdesc='OpenRC opentmpfiles init script'
     depends=('opentmpfiles')
+    provides=('init-opentmpfiles')
+    conflicts=('init-opentmpfiles')
     backup=('etc/conf.d/opentmpfiles-dev'
             'etc/conf.d/opentmpfiles-setup')
 
