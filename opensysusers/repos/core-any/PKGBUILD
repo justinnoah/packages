@@ -4,7 +4,7 @@
 pkgbase=opensysusers
 pkgname=(opensysusers opensysusers-openrc opensysusers-docs)
 pkgver=0.4.7
-pkgrel=2
+pkgrel=3
 pkgdesc="A standalone utility for handling systemd-style sysusers.d users and groups"
 arch=('any')
 url="https://github.com/artix-linux/opensysusers"
@@ -45,7 +45,9 @@ package_opensysusers() {
 
 package_opensysusers-openrc(){
     pkgdesc="OpenRC opensysusers init script"
+    provides=('init-opensysusers')
     depends=('opensysusers')
+    conflicts=('init-opensysusers')
 
     cd "${pkgbase}-${pkgver}"
     make PREFIX=/usr DESTDIR="${pkgdir}" install-openrc
