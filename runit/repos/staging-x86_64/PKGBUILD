@@ -9,12 +9,12 @@ _servicedir=/run/runit/service
 
 pkgname=runit
 pkgver=2.1.2
-pkgrel=8
+pkgrel=9
 pkgdesc='runit is a cross-platform Unix init scheme with service supervision'
 arch=('x86_64')
 url='http://smarden.org/runit/'
 license=('BSD3')
-depends=('elogind-runit' 'runit-rc')
+depends=('elogind-runit' 'runit-rc' 'agetty-runit')
 provides=('svc-manager')
 conflicts=('svc-manager')
 source=("http://smarden.org/${pkgname}/${pkgname}-${pkgver}.tar.gz"
