@@ -1,7 +1,7 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
 _url=https://github.com/artix-linux/runit-artix
-_pkgver=20180505.3
+_pkgver=20180506
 _pkgname=runit-artix
 
 # set default service path to /run/runit/service
@@ -9,7 +9,7 @@ _servicedir=/run/runit/service
 
 pkgname=runit
 pkgver=2.1.2
-pkgrel=9
+pkgrel=10
 pkgdesc='runit is a cross-platform Unix init scheme with service supervision'
 arch=('x86_64')
 url='http://smarden.org/runit/'
@@ -23,7 +23,7 @@ source=("http://smarden.org/${pkgname}/${pkgname}-${pkgver}.tar.gz"
         "svlogd.patch"
         "utmpset-time_t.patch")
 sha256sums=('6fd0160cb0cf1207de4e66754b6d39750cff14bb0aa66ab49490992c0c47ba18'
-            'ef1b5a150909730e7baeb4f7313535b820a786061ac774986efa0bf6bcb92460'
+            '243bf99bea5783bd15d9703acc4987787c4e914482d8137abff138dafbb5b709'
             '19b5e99135f153d07052f2dff707430af9faeabc717a5740ea58a8a783f609de'
             '9cf269264c0713975be1b3bc9dd3b5b3bb1e2078ac596527370a902d8d025a5a'
             '527f68f501cc9eb4bbab33f8ad374822624342c7d74b5c795efe4aac6b3f170a')
