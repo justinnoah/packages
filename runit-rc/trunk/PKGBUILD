@@ -4,8 +4,8 @@ _pkgname=runit-artix
 _servicedir=/run/runit/service
 
 pkgname=runit-rc
-pkgver=20180505.3
-pkgrel=3
+pkgver=20180506
+pkgrel=1
 pkgdesc='Artix Linux runit initscripts'
 arch=('x86_64')
 url='https://github.com/artix-linux/runit-artix'
@@ -17,7 +17,7 @@ depends=('procps-ng' 'awk' 'bash' 'opentmpfiles' 'bootlogd')
 provides=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 conflicts=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('ef1b5a150909730e7baeb4f7313535b820a786061ac774986efa0bf6bcb92460')
+sha256sums=('243bf99bea5783bd15d9703acc4987787c4e914482d8137abff138dafbb5b709')
 
 build() {
 	cd "${_pkgname}-${pkgver}"
