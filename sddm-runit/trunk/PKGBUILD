@@ -5,7 +5,7 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/service|/run/runit/service|g' -e 's|/var/run|/run|g' -e 's|/usr/sbin|/usr/bin|g' -e 's|/opt/bin|/usr/bin|g' -e 's|/usr/libexec|/usr/lib|g')
 
 pkgname=sddm-runit
-pkgver=20180226
+pkgver=20180505
 pkgrel=1
 pkgdesc="runit service scripts for sddm"
 arch=('any')
@@ -19,7 +19,7 @@ provides=('sddm-runscripts')
 replaces=('sddm-runscripts')
 conflicts=('systemd-sysvcompat')
 source=("sddm.run::${_url}/sddm/files/sddm/run")
-sha256sums=('aad8a13a3ddf4a6781ffe4c0c440b8177418a70b03ca94c309324f50af279d94')
+sha256sums=('708656b19849fcbf7057de05f5a0d55e75b7028c347b645f703c4d99972a62e4')
 
 _inst_logsv() {
     for file in run finish check; do
