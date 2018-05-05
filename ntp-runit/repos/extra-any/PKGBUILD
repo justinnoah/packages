@@ -5,7 +5,7 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/service|/run/runit/service|g' -e 's|/var/run|/run|g' -e 's|/usr/sbin|/usr/bin|g' -e 's|/opt/bin|/usr/bin|g' -e 's|/usr/libexec|/usr/lib|g')
 
 pkgname=ntp-runit
-pkgver=20180226
+pkgver=20180505
 pkgrel=1
 pkgdesc="runit service scripts for ntp"
 arch=('any')
@@ -18,8 +18,8 @@ depends=('ntp')
 provides=('ntp-runscripts')
 replaces=('ntp-runscripts')
 conflicts=('systemd-sysvcompat' 'openntpd' 'openntpd-runit')
-source=("ntpd.run::${_url}/ntp/files/isc-ntpd/run")
-sha256sums=('5268dc1706fe24df745af5c668dd8e6c51b2386bd4437c70af6de94e94801b2f')
+source=("ntpd.run")
+sha256sums=('36194053f1d0cbefafb58f69574b5ac8d33fa093905f26add0aed66468580714')
 
 _inst_logsv() {
     for file in run finish check; do
