@@ -1,10 +1,11 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
 _pkgname=runit-artix
+_servicedir=/run/runit/service
 
 pkgname=runit-rc
 pkgver=20180505.3
-pkgrel=1
+pkgrel=2
 pkgdesc='Artix Linux runit initscripts'
 arch=('x86_64')
 url='https://github.com/artix-linux/runit-artix'
@@ -17,10 +18,10 @@ sha256sums=('ef1b5a150909730e7baeb4f7313535b820a786061ac774986efa0bf6bcb92460')
 
 build() {
 	cd "${_pkgname}-${pkgver}"
-	make
+	make SERVICEDIR="${_servicedir}"
 }
 
 package() {
 	cd "${_pkgname}-${pkgver}"
-	make DESTDIR="${pkgdir}" PREFIX="/usr" install-rc
+	make DESTDIR="${pkgdir}" PREFIX="/usr" SERVICEDIR="${_servicedir}" install-rc
 }
