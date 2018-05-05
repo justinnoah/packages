@@ -5,11 +5,14 @@ _servicedir=/run/runit/service
 
 pkgname=runit-rc
 pkgver=20180505.3
-pkgrel=2
+pkgrel=3
 pkgdesc='Artix Linux runit initscripts'
 arch=('x86_64')
 url='https://github.com/artix-linux/runit-artix'
-license=('GPL')
+license=('BSD')
+backup=('etc/rc/rc.local'
+        'etc/rc/rc.shutdown'
+        'etc/rc/rc.conf')
 depends=('procps-ng' 'awk' 'bash' 'opentmpfiles' 'bootlogd')
 provides=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 conflicts=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
