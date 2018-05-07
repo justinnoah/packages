@@ -1,7 +1,7 @@
-# Maintainer: artoo <artoo@cromnix.org>
+# Maintainer: artoo <artoo@artixlinux.org>
 
 pkgname=iso-profiles
-pkgver=0.7
+pkgver=0.8
 pkgrel=1
 pkgdesc='Artix iso profiles'
 arch=('any')
@@ -9,17 +9,17 @@ license=('GPL')
 url='https://github.com/artix-linux/iso-profiles'
 makedepends=('git')
 conflicts=('artix-iso-profiles')
-source=("git+$url.git")
-sha256sums=('SKIP')
+source=("${pkgname}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
+sha256sums=('f664ad8aa1e207fd6d7c88b3fe566ef301a854b47d1f604078bf000a36b67c78')
 
-pkgver() {
-    cd ${pkgname}
-#     git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-    #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-    git describe --tags | sed 's/-/+/g'
-}
+# pkgver() {
+#     cd ${pkgname}
+# #     git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+#     #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+#     git describe --tags | sed 's/-/+/g'
+# }
 
 package() {
-    cd ${pkgname} #-${pkgver}
+    cd ${pkgname}-${pkgver}
     make PREFIX=/usr DESTDIR=${pkgdir} install
 }
