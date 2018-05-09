@@ -1,0 +1,27 @@
+# Maintainer: Muhammad Herdiansyah <herdiansyah@netc.eu>
+
+_sed_args=(-e 's|/var/service|/run/runit/service|g' -e 's|/var/run|/run|g' -e 's|/usr/sbin|/usr/bin|g' -e 's|/opt/bin|/usr/bin|g' -e 's|/usr/libexec|/usr/lib|g')
+
+pkgname=cryptsetup-runit
+pkgver=20180509
+pkgrel=1
+pkgdesc="runit stage1 script for cryptsetup"
+arch=('any')
+url="https://github.com/artix-linux"
+license=('BSD3')
+groups=('runit-system')
+depends=('cryptsetup')
+conflicts=('systemd-sysvcompat')
+source=('sysinit-11-cryptsetup.sh'
+        'shutdown-12-cryptsetup.sh'
+        'crypt.awk')
+optdepends=('lvm2-runit: LVM support for encrypted filesystems')
+sha256sums=('e3b926dd31aafa22b656fc22ccc2c97a78024a4801006284a6593df7bf927c32'
+            '11506396a97957aaed9415a8893f5cf764961c7eb792c2a3e803e41d5fcc3185'
+            'c9069a68c3ae5bff83988e806e8b5003c52d6e7eb74111b83e3340eaf34bf132')
+
+package() {
+    install -Dm644 ${srcdir}/sysinit-11-cryptsetup.sh ${pkgdir}/etc/rc/sysinit.d/11-cryptsetup.sh
+    install -Dm644 ${srcdir}/shutdown-12-cryptsetup.sh ${pkgdir}/etc/rc/shutdown.d/12-cryptsetup.sh
+    install -Dm644 ${srcdir}/crypt.awk ${pkgdir}/etc/rc/crypt.awk
+}
