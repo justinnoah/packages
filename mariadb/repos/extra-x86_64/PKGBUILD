@@ -4,7 +4,7 @@
 
 pkgbase=mariadb
 pkgname=('libmariadbclient' 'mariadb-clients' 'mytop' 'mariadb')
-pkgver=10.1.32
+pkgver=10.1.33
 pkgrel=1
 arch=('x86_64')
 license=('GPL')
@@ -16,7 +16,7 @@ source=("https://ftp.heanet.ie/mirrors/mariadb/mariadb-$pkgver/source/mariadb-$p
         '0001-openssl-1-1-0.patch'
         '0002-mroonga-after-merge-CMakeLists.txt-fixes.patch'
         'dont-check-systemd.patch')
-sha256sums=('0e2aae6a6a190d07c8e36e87dd43377057fa82651ca3c583462563f3e9369096'
+sha256sums=('94312c519f2c0c25e1964c64e22aff0036fb22dfb2685638f43a6b2211395d2d'
             'SKIP'
             '229d556748119757f36be1e9956834be28db0f5a35cdacce53f6c640784fca77'
             '98736aefef21e575e450f8066685ba82771264409412e33491ab0a54e4407ba7'
@@ -73,20 +73,21 @@ build() {
     -DINSTALL_SHAREDIR=share/mysql \
     -DINSTALL_SYSTEMD_SYSUSERSDIR=/usr/lib/sysusers.d/ \
     -DINSTALL_SYSTEMD_TMPFILESDIR=/usr/lib/tmpfiles.d/ \
+    -DINSTALL_SYSTEMD_UNITDIR=no \
     -DWITH_SYSTEMD=no \
     -DWITH_READLINE=ON \
     -DWITH_ZLIB=system \
     -DWITH_SSL=system \
     -DWITH_PCRE=bundled \
     -DWITH_LIBWRAP=OFF \
-    -DWITH_JEMALLOC=system \
-    -DTOKUDB_OK=0 \
+    -DWITH_JEMALLOC=ON \
     -DWITH_EXTRA_CHARSETS=complex \
     -DWITH_EMBEDDED_SERVER=ON \
     -DWITH_ARCHIVE_STORAGE_ENGINE=1 \
     -DWITH_BLACKHOLE_STORAGE_ENGINE=1 \
     -DWITH_INNOBASE_STORAGE_ENGINE=1 \
     -DWITH_PARTITION_STORAGE_ENGINE=1 \
+    -DTOKUDB_OK=0 \
     -DWITH_TOKUDB_STORAGE_ENGINE=1 \
     -DWITHOUT_EXAMPLE_STORAGE_ENGINE=1 \
     -DWITHOUT_FEDERATED_STORAGE_ENGINE=1 \
@@ -176,6 +177,9 @@ package_mariadb() {
   # move to proper licenses directories
   install -d usr/share/licenses/mariadb
   mv usr/share/doc/mariadb/COPYING* usr/share/licenses/mariadb/
+
+  # already installed to real systemd unit directory
+#   rm -r usr/share/mysql/systemd/
 
   # left over from sysvinit
   rm usr/bin/rcmysql
