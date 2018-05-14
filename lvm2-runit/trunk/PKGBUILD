@@ -5,27 +5,23 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=lvm2-runit
-pkgver=20180509
+pkgver=20180514
 pkgrel=1
 pkgdesc="runit service and stage1 scripts for lvm2"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
 groups=('runit-system')
-depends=('lvm2')
+depends=('lvm2' 'runit')
 provides=('lvm2-runscripts' 'init-lvm2')
 conflicts=('init-lvm2')
 replaces=('lvm2-runscripts')
 source=("lvmetad.run::${_url}/lvm2/files/lvmetad/run"
-        "sysinit-10-lvm2.sh"
-        "sysinit-15-lvm2-monitoring.sh"
-        "shutdown-04-lvm2-monitoring.sh"
-        "shutdown-13-lvm2.sh")
+        "lvm2-monitoring"
+        "lvm2")
 sha256sums=('ed490eab75c0ff3e2d9f1802c47478198725e9b16cfd03392f7f03d2d65b6fc2'
-            '6b06a30b43fb8c6ff0fd9bd62eb71c08b97e215411b79cb4911e4465bd4cd121'
-            '968dc1d56980157a5c921895f1eeca202f8063bbea9c89a24bb49b959966ef3b'
-            '9341fd404798cec372859004562f3f09d588cc61d6836770016987821459ef09'
-            '1599c8cfcaf3cc10ba8ace297dea7732963ba27a4edf46f84923a0c14a9f3354')
+            '7a1cdb90aa145a2904bac250d9069a3b7a94330f65d06141c1f89a613c0a8dad'
+            'a8375e73686b0e18bda9da7e8cffd3eb073c61eb52fde79cc473ebdc458e688e')
 
 _inst_sv(){
     for file in run finish check; do
@@ -38,8 +34,13 @@ _inst_sv(){
 
 package() {
     _inst_sv 'lvmetad'
-    install -Dm644 "${srcdir}/sysinit-10-lvm2.sh" "${pkgdir}/etc/rc/sysinit.d/10-lvm2.sh"
-    install -Dm644 "${srcdir}/sysinit-15-lvm2-monitoring.sh" "${pkgdir}/etc/rc/sysinit.d/15-lvm2-monitoring.sh"
-    install -Dm644 "${srcdir}/shutdown-04-lvm2-monitoring.sh" "${pkgdir}/etc/rc/shutdown.d/04-lvm2-monitoring.sh"
-    install -Dm644 "${srcdir}/shutdown-13-lvm2.sh" "${pkgdir}/etc/rc/shutdown.d/13-lvm2.sh"
+    install -Dm644 "${srcdir}/lvm2" "${pkgdir}/usr/lib/rc/sv.d/lvm2"
+    install -Dm644 "${srcdir}/lvm2-monitoring" "${pkgdir}/usr/lib/rc/sv.d/lvm2-monitoring"
+
+    # create default symlinks?
+#     install -d ${pkgdir}/etc/rc/{sysinit,shutdown}
+#     ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/sysinit/34-lvm
+#     ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/sysinit/35-lvm
+#     ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/shutdown/31-lvm
+#     ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/shutdown/32-lvm
 }
