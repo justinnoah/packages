@@ -1,32 +1,31 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
 _pkgname=runit-artix
-_servicedir=/run/runit/service
+_commit=cb2cd17cbd407452f30d483276a3350395689eac
 
 pkgname=runit-rc
-pkgver=20180509
+pkgver=20180514
 pkgrel=1
-pkgdesc='Artix Linux runit initscripts'
+pkgdesc='Artix Linux system initialization and shutdown for runit '
 arch=('x86_64')
-url='https://github.com/artix-linux/runit-artix'
+url='https://github.com/artix-linux/runit-rc'
 license=('BSD')
-backup=('etc/rc/rc.local'
-        'etc/rc/rc.shutdown'
-        'etc/rc/rc.conf')
-depends=('procps-ng' 'awk' 'bash' 'opentmpfiles' 'bootlogd')
+backup=('etc/rc/rc.conf')
+makedepends=('git')
+depends=('procps-ng' 'bash' 'opentmpfiles' 'bootlogd')
 provides=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 conflicts=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
-source=("${_pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('d8a4419ef7f9860561ee196c9400f52ec5c07e1e2679ba3e6cc903d747b5fc95')
+source=("git+${url}.git#commit=$_commit")
+sha256sums=('SKIP')
 optdepends=('lvm2-runit: LVM support for runit'
             'cryptsetup-runit: Enable boot support for encrypted partitions')
 
 build() {
-	cd "${_pkgname}-${pkgver}"
-	make SERVICEDIR="${_servicedir}"
+	cd ${pkgname} #-${pkgver}
+	make
 }
 
 package() {
-	cd "${_pkgname}-${pkgver}"
-	make DESTDIR="${pkgdir}" PREFIX="/usr" SERVICEDIR="${_servicedir}" install-rc
+	cd ${pkgname} #-${pkgver}
+	make DESTDIR="${pkgdir}" install-rc
 }
