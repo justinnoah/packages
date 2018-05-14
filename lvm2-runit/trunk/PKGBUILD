@@ -6,7 +6,7 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=lvm2-runit
 pkgver=20180514
-pkgrel=1
+pkgrel=2
 pkgdesc="runit service and stage1 scripts for lvm2"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -34,8 +34,8 @@ _inst_sv(){
 
 package() {
     _inst_sv 'lvmetad'
-    install -Dm644 "${srcdir}/lvm2" "${pkgdir}/usr/lib/rc/sv.d/lvm2"
-    install -Dm644 "${srcdir}/lvm2-monitoring" "${pkgdir}/usr/lib/rc/sv.d/lvm2-monitoring"
+    install -Dm755 "${srcdir}/lvm2" "${pkgdir}/usr/lib/rc/sv.d/lvm2"
+    install -Dm755 "${srcdir}/lvm2-monitoring" "${pkgdir}/usr/lib/rc/sv.d/lvm2-monitoring"
 
     # create default symlinks?
 #     install -d ${pkgdir}/etc/rc/{sysinit,shutdown}
