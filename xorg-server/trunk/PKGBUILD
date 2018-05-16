@@ -6,7 +6,7 @@ pkgbase=xorg-server
 pkgname=('xorg-server' 'xorg-server-xephyr' 'xorg-server-xdmx' 'xorg-server-xvfb' 'xorg-server-xnest'
          'xorg-server-xwayland' 'xorg-server-common' 'xorg-server-devel')
 pkgver=1.20.0
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 license=('custom')
 groups=('xorg')
@@ -20,7 +20,7 @@ makedepends=('xorgproto' 'pixman' 'libx11' 'mesa' 'mesa-libgl' 'xtrans'
 #_commit=d0d1a694f967af770fba0d36043fd5218ff20984 # branch 1.19
 
 #source=("git+https://anongit.freedesktop.org/git/xorg/xserver.git#commit=$_commit"
-source=(https://xorg.freedesktop.org/releases/individual/xserver/${pkgbase}-${pkgver}.tar.bz2 #{,.sig}
+source=(https://xorg.freedesktop.org/releases/individual/xserver/${pkgbase}-${pkgver}.tar.bz2{,.sig}
         xwayland-config.h.meson.in # missing from tarball
         xserver-autobind-hotplug.patch
         xvfb-run # with updates from FC master
@@ -30,6 +30,7 @@ validpgpkeys=('7B27A3F1A6E18CD9588B4AE8310180050905E40C'
               'DD38563A8A8224537D1F90E45B8A2D50A0ECD0D3'
               '995ED5C8A6138EB0961F18474C09DD83CAAA50B2')
 sha512sums=('1489e8511c9da682ef0460182dfeeddd241c72d4ef4d206d9706f1e39572c09953df851fab18cefb65a1ee4c6710c6ba13c63c9c9fc0bc1b5f12c50780412cde'
+            'SKIP'
             '4ed2a66dd98697accef34f84d44490594bf071232fa74640d514a170f1fbe760b292a0b53fe47080b73acf6083cea57e35f11cfd42ba9dc211b8e8dcac343dfc'
             'd84f4d63a502b7af76ea49944d1b21e2030dfd250ac1e82878935cf631973310ac9ba1f0dfedf10980ec6c7431d61b7daa4b7bbaae9ee477b2c19812c1661a22'
             '55bbf520333f6e818b0125b37179a7039b69a0d3d2242b80a08da003d94cbf6c1fb912d880abcce318a85d7947e3eff8fbc4cdf57d7118572e8ebc56c4569af6'
@@ -59,7 +60,7 @@ build() {
   export LDFLAGS=${LDFLAGS/,-z,now}
 
   arch-meson ${pkgbase}-$pkgver build \
-    -D os_vendor="Arch Linux" \
+    -D os_vendor="Artix Linux" \
     -D ipv6=true \
     -D dmx=true \
     -D xvfb=true \
@@ -73,8 +74,7 @@ build() {
     -D systemd_logind=true \
     -D suid_wrapper=true \
     -D xkb_dir=/usr/share/X11/xkb \
-    -D xkb_output_dir=/var/lib/xkb \
-    -D default_font_path=/usr/share/fonts
+    -D xkb_output_dir=/var/lib/xkb
 
 #     -D xwayland_eglstream=true \ # requires weston-eglstream from AUR
 
