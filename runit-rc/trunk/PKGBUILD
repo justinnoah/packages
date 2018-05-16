@@ -5,13 +5,14 @@ _commit=19f79292db32e7419f82679e3d16a241f0b552dc
 
 pkgname=runit-rc
 pkgver=20180517
-pkgrel=1
+pkgrel=2
 pkgdesc='Artix Linux system initialization and shutdown for runit '
 arch=('x86_64')
 url='https://github.com/artix-linux/runit-rc'
 license=('BSD')
 backup=('etc/rc/rc.conf')
 makedepends=('git')
+install="runit-rc.install"
 depends=('procps-ng' 'bash' 'opentmpfiles' 'bootlogd')
 provides=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 conflicts=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
