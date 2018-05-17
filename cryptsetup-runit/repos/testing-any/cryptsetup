@@ -81,7 +81,6 @@ do_unlock() {
 	fi
 
 	do_unlock_device "$name" "$device" "$password" "$options"
-	esac
 	failed=$?
 	if (( $failed )); then
 		printf "${C_FAIL}Unlocking of $1 failed.${C_CLEAR}\n"
@@ -114,14 +113,14 @@ case "$1" in
         stat_busy "Starting encrypted devices"
         read_crypttab do_unlock
         rc=$?
-        vgchange --sysinit -a y >/dev/null
+        [[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a y >/dev/null
         (( rc || $? )) && stat_die
         add_daemon cryptsetup
         stat_done
         ;;
     stop)
         stat_busy "Stopping encrypted devices"
-        vgchange --sysinit -a n &>/dev/null
+        [[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a n &>/dev/null
         rc=$?
         read_crypttab do_lock
         (( rc || $? )) && stat_die
