@@ -113,14 +113,22 @@ case "$1" in
         stat_busy "Starting encrypted devices"
         read_crypttab do_unlock
         rc=$?
-        [[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a y >/dev/null
+        # [[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a y >/dev/null
+        # Using the above, $? will return >0, which results in stat_die.
+        if [[ -f /run/sv.d/started/lvm ]]; then
+            vgchange --sysinit -a y >/dev/null
+        fi
         (( rc || $? )) && stat_die
         add_daemon cryptsetup
         stat_done
         ;;
     stop)
         stat_busy "Stopping encrypted devices"
-        [[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a n &>/dev/null
+        #[[ -f /run/sv.d/started/lvm ]] && vgchange --sysinit -a n &>/dev/null
+        # Using the above, $? will return >0, which results in stat_die.
+        if [[ -f /run/sv.d/started/lvm ]]; then
+            vgchange --sysinit -a y >/dev/null
+        fi
         rc=$?
         read_crypttab do_lock
         (( rc || $? )) && stat_die
