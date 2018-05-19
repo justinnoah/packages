@@ -2,7 +2,7 @@
 
 pkgname=cryptsetup-runit
 pkgver=20180514
-pkgrel=6
+pkgrel=7
 pkgdesc="runit stage1 script for cryptsetup"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -21,5 +21,5 @@ package() {
     # create default symlinks?
      install -d ${pkgdir}/etc/rc/{sysinit,shutdown}
      ln -sf /usr/lib/rc/sv.d/cryptsetup ${pkgdir}/etc/rc/sysinit/35-cryptsetup
-     ln -sf /usr/lib/rc/sv.d/cryptsetup ${pkgdir}/etc/rc/shutdown/32-cryptsetup
+     ln -sf /usr/lib/rc/sv.d/cryptsetup ${pkgdir}/etc/rc/shutdown/65-cryptsetup
 }
