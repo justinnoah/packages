@@ -5,9 +5,9 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=lvm2-runit
-pkgver=20180429
-pkgrel=1
-pkgdesc="runit service scripts for lvm2"
+pkgver=20180514
+pkgrel=4
+pkgdesc="runit service and stage1 scripts for lvm2"
 arch=('any')
 url="https://github.com/artix-linux"
 license=('BSD3')
@@ -16,7 +16,12 @@ depends=('lvm2' 'runit')
 provides=('lvm2-runscripts' 'init-lvm2')
 conflicts=('init-lvm2')
 replaces=('lvm2-runscripts')
-source=("lvmetad.run::${_url}/lvm2/files/lvmetad/run")
+source=("lvmetad.run::${_url}/lvm2/files/lvmetad/run"
+        "lvm2-monitoring"
+        "lvm2")
+sha256sums=('ed490eab75c0ff3e2d9f1802c47478198725e9b16cfd03392f7f03d2d65b6fc2'
+            '7a1cdb90aa145a2904bac250d9069a3b7a94330f65d06141c1f89a613c0a8dad'
+            'a8375e73686b0e18bda9da7e8cffd3eb073c61eb52fde79cc473ebdc458e688e')
 
 _inst_sv(){
     for file in run finish check; do
@@ -29,5 +34,11 @@ _inst_sv(){
 
 package() {
     _inst_sv 'lvmetad'
+    install -Dm755 "${srcdir}/lvm2" "${pkgdir}/usr/lib/rc/sv.d/lvm2"
+    install -Dm755 "${srcdir}/lvm2-monitoring" "${pkgdir}/usr/lib/rc/sv.d/lvm2-monitoring"
+
+    # create default symlinks?
+    install -d ${pkgdir}/etc/rc/{sysinit,shutdown}
+    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/sysinit/34-lvm
+    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/shutdown/64-lvm
 }
-md5sums=('a8189ddaba03f16f971db606f36d7cd6')
