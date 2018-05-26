@@ -1,19 +1,18 @@
-# Maintainer: artoo <artoo@cromnix.org>
-# Contributor: Philip Müller <philm[at]manjaro[dog]org>
+# Maintainer: artoo <artoo@artixlinux.org>
 
 pkgbase=live-services
 pkgname=('artix-live-base'
 	'artix-live-openrc'
 	'artix-live-portable-efi'
 	'artix-live-runit')
-pkgver=0.5.1
-pkgrel=2
+pkgver=0.5.2
+pkgrel=1
 pkgdesc='Artix live session'
 arch=('any')
 url="https://github.com/artix-linux/live-services"
 license=('GPL')
 source=("${pkgbase}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('ce4e19748334881a2f037db48ca1513e0de1c3d0e3af8f064a6afeb1f21fcfaa')
+sha256sums=('42cef16461b0bdbbbabaaa1fe72e55cef6f0f44851c61ade8767764a92cf9f58')
 
 build() {
     cd ${pkgbase}-${pkgver}
