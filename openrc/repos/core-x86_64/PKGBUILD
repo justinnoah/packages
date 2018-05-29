@@ -7,7 +7,7 @@ _url="https://github.com/OpenRC/openrc/archive"
 pkgbase=openrc
 pkgname=('openrc' 'openrc-bash-completions' 'openrc-zsh-completions')
 pkgver=0.35.5
-pkgrel=12
+pkgrel=13
 pkgdesc="Gentoo's universal init system"
 arch=('x86_64')
 url="http://www.gentoo.org/proj/en/base/openrc/"
@@ -84,6 +84,8 @@ package_openrc() {
 
     sed -e 's/#unicode="NO"/unicode="YES"/' \
         -e 's/#rc_logger="NO"/rc_logger="YES"/' \
+        -e 's/#rc_controller_cgroups="YES"/rc_controller_cgroups="YES"/' \
+        -e 's|#rc_shell=/bin/sh|rc_shell=/usr/bin/sulogin|' \
         -i "${pkgdir}/etc/rc.conf"
 
     install -d ${pkgdir}/usr/lib/openrc/cache
