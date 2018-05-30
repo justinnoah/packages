@@ -2,10 +2,10 @@
 # Maintainer: Dave Reisner <dreisner@archlinux.org>
 
 pkgname=kmod
-pkgver=24
+pkgver=25
 pkgrel=1
 pkgdesc="Linux kernel module management tools and library"
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url='http://git.kernel.org/?p=utils/kernel/kmod/kmod.git;a=summary'
 license=('GPL2')
 depends=('glibc' 'zlib' 'xz')
@@ -17,12 +17,10 @@ conflicts=('module-init-tools')
 replaces=('module-init-tools')
 validpgpkeys=('EAB33C9690013C733916AC839BA2A5A630CBEA53')  # Lucas DeMarchi
 source=("https://www.kernel.org/pub/linux/utils/kernel/$pkgname/$pkgname-$pkgver.tar."{xz,sign}
-        "depmod-search.conf"
-        "kmod-static-nodes.initd")
-md5sums=('08297dfb6f2b3f625f928ca3278528af'
+        "depmod-search.conf")
+md5sums=('34f325cab568f842fdde4f8b2182f220'
          'SKIP'
-         'dd62cbf62bd8f212f51ef8c43bec9a77'
-         '4ab3283dc595fe73eeff2732979d31b5')
+         'dd62cbf62bd8f212f51ef8c43bec9a77')
 
 
 build() {
@@ -68,12 +66,6 @@ package() {
 
   # install depmod.d file for search/ dir
   install -Dm644 "$srcdir/depmod-search.conf" "$pkgdir/usr/lib/depmod.d/search.conf"
-
-#   install -dm755 ${pkgdir}/etc/{init.d,runlevels/sysinit}
-#    # kmod-static-nodes
-#     install -Dm755 ${srcdir}/kmod-static-nodes.initd ${pkgdir}/etc/init.d/kmod-static-nodes
-#
-#     ln -sf "/etc/init.d/kmod-static-nodes" "${pkgdir}/etc/runlevels/sysinit/kmod-static-nodes"
 }
 
 # vim: ft=sh syn=sh et
