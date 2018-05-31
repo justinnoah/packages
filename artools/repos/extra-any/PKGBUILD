@@ -2,8 +2,8 @@
 
 pkgbase=artools
 pkgname=('artools-base' 'artools-pkg' 'artools-iso')
-pkgver=0.8.5
-pkgrel=3
+pkgver=0.8.6
+pkgrel=1
 arch=('any')
 pkgdesc='Development tools for Artix'
 license=('GPL')
@@ -12,7 +12,7 @@ url='https://github.com/artix-linux/artools'
 source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz"
         arch.patch::https://github.com/artix-linux/artools/commit/50f90ab53cd926b8dbf397c58f3241dc27a29544.patch
         buildtree.patch::https://github.com/artix-linux/artools/commit/aa12fc42bd0f4636ef1f03ae90ae6a145af2f3cd.patch)
-sha256sums=('c426927138b2db1db04251d872fe7ef83c5407d5040d36645d63953a570a542c'
+sha256sums=('65876f1c55cee213dcc53cf382aa9a3a57689d430a8d27c2730e6a8bfb9413d5'
             'd1340e3909d073339b4bfd366569460a6e32ac82fee9a58f976fd136069cf1bf'
             '9895528440cb625809fc96d0d98e2beb8884897e4b3c8dd1588bb49f2f8c3954')
 
