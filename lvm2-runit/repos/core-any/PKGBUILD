@@ -6,7 +6,7 @@ _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=lvm2-runit
 pkgver=20180514
-pkgrel=4
+pkgrel=5
 pkgdesc="runit service and stage1 scripts for lvm2"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -39,6 +39,6 @@ package() {
 
     # create default symlinks?
     install -d ${pkgdir}/etc/rc/{sysinit,shutdown}
-    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/sysinit/34-lvm
-    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/shutdown/64-lvm
+    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/sysinit/34-lvm2
+    ln -sf /usr/lib/rc/sv.d/lvm2 ${pkgdir}/etc/rc/shutdown/64-lvm2
 }
