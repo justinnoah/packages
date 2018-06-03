@@ -1,18 +1,17 @@
 # Maintainer: Chris Cromer <chris@cromer.cl>
 
 _pkgname=runit-artix
-_commit=6ef8becf0f9e6ea33dc6bfa7f61c4f5f3c720ce9
+_commit=737c34fd1ae6fe42683ef840a87a879232018fb1
 
 pkgname=runit-rc
 pkgver=20180517
-pkgrel=3
-pkgdesc='Artix Linux system initialization and shutdown for runit '
+pkgrel=4
+pkgdesc='Artix Linux system initialization and shutdown for runit'
 arch=('x86_64')
 url='https://github.com/artix-linux/runit-rc'
 license=('BSD')
 backup=('etc/rc/rc.conf')
 makedepends=('git')
-install="runit-rc.install"
 depends=('procps-ng' 'bash' 'opentmpfiles' 'bootlogd')
 provides=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')
 conflicts=('init-kmod' 'init-udev' 'init-opentmpfiles' 'init-opensysusers')

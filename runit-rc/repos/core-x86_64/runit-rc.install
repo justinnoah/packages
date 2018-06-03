@@ -1,6 +1,0 @@
-post_install()
-{
-    echo "==> A lot has happened in runit-rc development. If you have lvm/encrypted"
-    echo "    partition, you will need to install lvm2-runit or cryptsetup-runit."
-    echo "==> For more information, see https://forum.artixlinux.org on runit section."
-}
