@@ -4,7 +4,7 @@
 
 pkgname=metalog
 pkgver=3.0
-pkgrel=2
+pkgrel=3
 pkgdesc="A modern replacement for syslogd and klogd"
 url="http://metalog.sourceforge.net"
 license=('GPL')
@@ -12,7 +12,7 @@ arch=('x86_64')
 depends=('pcre')
 provides=('logger')
 backup=('etc/metalog.conf')
-source=("http://sourceforge.net/projects/metalog/files/metalog-3.tar.xz")
+source=("http://sourceforge.net/projects/metalog/files/metalog-3.tar.xz/download")
 md5sums=('6fe404e49764fa24108fd090417bacb5')
 
 build() {
