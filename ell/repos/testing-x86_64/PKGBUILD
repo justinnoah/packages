@@ -28,7 +28,7 @@ build() {
 
 check() {
   cd "$pkgname"
-  make -k check
+  make -k check || :
 }
 
 package() {
