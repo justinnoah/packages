@@ -5,7 +5,7 @@
 
 pkgname=bash
 _basever=4.4
-_patchlevel=019
+_patchlevel=023
 pkgver=${_basever}.${_patchlevel}
 pkgrel=1
 pkgdesc='The GNU Bourne Again shell'
@@ -22,8 +22,7 @@ source=(https://ftp.gnu.org/gnu/bash/bash-$_basever.tar.gz{,.sig}
         dot.bash_profile
         dot.bash_logout
         system.bashrc
-        system.bash_logout
-        artix.bashrc)
+        system.bash_logout artix.bashrc)
 validpgpkeys=('7C0135FB088AAF6C66C650B9BB5869F064EA74AB') # Chet Ramey
 
 if [[ $((10#${_patchlevel})) -gt 0 ]]; then
@@ -73,7 +72,7 @@ package() {
   install -m644 dot.bashrc "$pkgdir/etc/skel/.bashrc"
   install -m644 dot.bash_profile "$pkgdir/etc/skel/.bash_profile"
   install -m644 dot.bash_logout "$pkgdir/etc/skel/.bash_logout"
-  install -Dm644 artix.bashrc "$pkgdir"/etc/bash/bashrc.d/artix.bashrc
+  install -Dm644 artix.bashrc $pkgdir/etc/bash/bashrc.d/artix.bashrc
 }
 
 md5sums=('148888a7c95ac23705559b6f477dfe25'
@@ -121,4 +120,12 @@ md5sums=('148888a7c95ac23705559b6f477dfe25'
          'b25e3373fc8de00523116dfe151ac4e0'
          'SKIP'
          '8f43e1d277b02f3319a34c1cd4a4ff3e'
+         'SKIP'
+         '5217ff08c444446ec306dce60437c288'
+         'SKIP'
+         '282c7d9b38da8005d25b4f816328a2f4'
+         'SKIP'
+         '0b709c9d7f8e6cf267a8b863efb899f7'
+         'SKIP'
+         'fe2e0ca4cf9409ff0e9428e1236f983e'
          'SKIP')
