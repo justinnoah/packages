@@ -9,9 +9,9 @@ pkgdesc="C library for encoding data in a QR Code symbol."
 arch=(x86_64)
 depends=('libpng')
 makedepends=(sdl)
-url="https://megaui.net/fukuchi/works/qrencode/"
+url="https://fukuchi.org/works/qrencode/"
 license=('GPL')
-source=(https://megaui.net/fukuchi/works/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
+source=(https://fukuchi.org/works/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('62950c75b1987a701aa5e70977ee960c')
 
 build() {
