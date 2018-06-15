@@ -1,0 +1,29 @@
+# $Id$
+# Contributor: Camille Moncelier <pix@devlife.org>, simo <simo@archlinux.org>
+# Maintainer: Tobias Powalowski <tpowa@archlinux.org>
+
+pkgname=kexec-tools
+pkgver=2.0.15
+pkgrel=1
+pkgdesc="Load another kernel from the currently executing Linux kernel"
+arch=('x86_64')
+license=('GPL2')
+url="http://kernel.org/pub/linux/utils/kernel/kexec/"
+makedepends=('git')
+depends=('gawk' 'zlib' 'xz')
+source=("git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git#tag=v${pkgver}")
+md5sums=('SKIP')
+
+build() {
+  cd $srcdir/$pkgname
+  ./bootstrap
+  ./configure --prefix=/usr --sbindir=/usr/bin --without-lzma
+  make
+}
+
+package() {
+  cd $srcdir/$pkgname
+  make DESTDIR=$pkgdir install
+  install -D -m644 kexec/kexec.8 $pkgdir/usr/share/man/man8/kexec.8
+}
+
