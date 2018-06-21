@@ -2,7 +2,7 @@
 
 pkgbase=artools
 pkgname=('artools-base' 'artools-pkg' 'artools-iso')
-pkgver=0.8.7
+pkgver=0.8.8
 pkgrel=1
 arch=('any')
 pkgdesc='Development tools for Artix'
@@ -10,7 +10,7 @@ license=('GPL')
 groups=('artools')
 url='https://github.com/artix-linux/artools'
 source=("${pkgbase}-${pkgver}.tar.gz::$url/archive/${pkgver}.tar.gz")
-sha256sums=('38990f949dfbd45e429ea2556eaf157266125a08e8c64161582b8eee278b166a')
+sha256sums=('43988435c87faaa495e2d091ab3f2b2d4e0305f5b4edc1e19964e655a550615f')
 
 prepare() {
     cd ${srcdir}/${pkgbase}-${pkgver}
@@ -44,7 +44,7 @@ package_artools-pkg() {
 
 package_artools-iso() {
     pkgdesc='Development tools for Artix (ISO tools)'
-    depends=('dosfstools' 'libisoburn' 'iso-profiles'
+    depends=('dosfstools' 'libisoburn' 'iso-profiles' 'bdf-unifont'
             'squashfs-tools' 'mkinitcpio' 'mktorrent' 'grub')
     conflicts=('artools-iso-base')
     replaces=('artools-iso-base')
