@@ -1,4 +1,3 @@
 #!/bin/sh
 sv check dbus >/dev/null || exit 1
-sleep 2
 exec /usr/lib/elogind/elogind

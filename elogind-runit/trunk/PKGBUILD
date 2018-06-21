@@ -5,7 +5,7 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=elogind-runit
-pkgver=20180508
+pkgver=20180621
 pkgrel=1
 pkgdesc="runit service scripts for elogind"
 arch=('any')
@@ -16,7 +16,7 @@ provides=('elogind-runscripts' 'init-elogind')
 replaces=('elogind-runscripts')
 conflicts=('init-elogind')
 source=("elogind.run")
-sha256sums=('662bd36b6587caf14a1c4433d73842d4e05c9f335aab43eaeed45b75c203ed63')
+sha256sums=('f1375235c4543f3081ddfa7c71bb4f5343b3048c7fd4d9dc312ce6163055f396')
 
 _inst_sv(){
     for file in run finish check; do

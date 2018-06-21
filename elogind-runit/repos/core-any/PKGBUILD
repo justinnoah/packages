@@ -5,8 +5,8 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=elogind-runit
-pkgver=20180429
-pkgrel=3
+pkgver=20180621
+pkgrel=1
 pkgdesc="runit service scripts for elogind"
 arch=('any')
 url="https://github.com/artix-linux"
