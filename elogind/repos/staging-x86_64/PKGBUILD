@@ -3,7 +3,7 @@
 pkgbase=elogind
 pkgname=('elogind' 'libelogind')
 pkgver=238
-pkgrel=5
+pkgrel=6
 pkgdesc="The systemd project's logind, extracted to a standalone package"
 arch=('x86_64')
 url="https://github.com/elogind/elogind"
@@ -38,10 +38,10 @@ build() {
     ninja -C build
 }
 
-# check(){
-#     cd build
-#     meson test
-# }
+check(){
+    cd build
+    meson test
+}
 
 package_elogind() {
     pkgdesc="The systemd project's logind, extracted to a standalone package"
