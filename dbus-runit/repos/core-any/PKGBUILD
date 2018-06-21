@@ -5,8 +5,8 @@ _url="https://github.com/voidlinux/void-packages/raw/master/srcpkgs"
 _sed_args=(-e 's|/var/run|/run|g' -e 's|\(/usr\)\?/sbin|/usr/bin|g')
 
 pkgname=dbus-runit
-pkgver=20180429
-pkgrel=3
+pkgver=20180621
+pkgrel=1
 pkgdesc="runit service scripts for dbus"
 arch=('any')
 url="https://github.com/artix-linux"
@@ -15,8 +15,10 @@ depends=('dbus')
 provides=('dbus-runscripts' 'init-dbus')
 conflicts=('init-dbus')
 replaces=('dbus-runscripts')
-source=("dbus.run")
-sha256sums=('68b377243a3fcf3639ad7f2df1d97f1ef6f21bdf99567c6d34254f5e90428675')
+source=("dbus.run"
+        "dbus.check")
+sha256sums=('68b377243a3fcf3639ad7f2df1d97f1ef6f21bdf99567c6d34254f5e90428675'
+            'd23ab19daba686c161eba19126971c6d6c960c812b4074e23c8f65bb1bf55b8a')
 
 _inst_sv(){
     for file in run finish check; do
