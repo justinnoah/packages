@@ -3,16 +3,15 @@
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 
 pkgname=kexec-tools
-pkgver=2.0.15
+pkgver=2.0.17
 pkgrel=1
 pkgdesc="Load another kernel from the currently executing Linux kernel"
 arch=('x86_64')
-license=('GPL2')
 url="http://kernel.org/pub/linux/utils/kernel/kexec/"
+source=("git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git#tag=v${pkgver}")
 makedepends=('git')
 depends=('gawk' 'zlib' 'xz')
-source=("git://git.kernel.org/pub/scm/utils/kernel/kexec/kexec-tools.git#tag=v${pkgver}")
-md5sums=('SKIP')
+license=('GPL2')
 
 build() {
   cd $srcdir/$pkgname
@@ -27,3 +26,4 @@ package() {
   install -D -m644 kexec/kexec.8 $pkgdir/usr/share/man/man8/kexec.8
 }
 
+md5sums=('SKIP')
