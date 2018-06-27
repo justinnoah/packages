@@ -1,22 +1,23 @@
-# Maintainer: artoo <artoo@cromnix.org>
+# Maintainer: artoo <artoo@artixlinux.org>
 
 pkgbase=elogind
 pkgname=('elogind' 'libelogind')
-pkgver=235.4
-pkgrel=2
+pkgver=238.1
+pkgrel=1
 pkgdesc="The systemd project's logind, extracted to a standalone package"
-arch=('i686' 'x86_64' 'armv7h')
+arch=('x86_64')
 url="https://github.com/elogind/elogind"
 license=('GPL' 'LGPL2.1')
-makedepends=('intltool' 'libtool' 'gperf' 'gtk-doc' 'polkit' 'dbus' 'eudev' 'libseccomp' 'meson' 'git')
+makedepends=('intltool' 'libtool' 'gperf' 'gtk-doc' 'polkit' 'dbus' 'eudev'
+            'libseccomp' 'meson' 'kexec-tools' 'artix-sysvcompat')
 options=('!libtool')
-# source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/elogind/elogind/archive/v${pkgver}.tar.gz"
+source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/elogind/elogind/archive/v${pkgver}.tar.gz")
 #         "protect-user-XDG_RUNTIME_DIR.patch")
-source=("git+https://github.com/elogind/elogind.git#branch=v235-stable")
-sha256sums=('SKIP')
+# source=("git+https://github.com/elogind/elogind.git#branch=v238-stable")
+sha256sums=('b0416c4194198f6af71f5ffb3b3d5d8f20e446acb80699eb4e8df3f79dd18acf')
 
 prepare() {
-    cd ${pkgbase} #-${pkgver}
+    cd ${pkgbase}-${pkgver}
 #     patch -Np1 -i ${srcdir}/protect-user-XDG_RUNTIME_DIR.patch
 }
 
@@ -25,25 +26,29 @@ build() {
         -Drootlibdir=/usr/lib
         -Drootlibexecdir=/usr/lib/elogind
         -Ddbuspolicydir=/usr/share/dbus-1/system.d
+        -Ddocdir=/usr/share/doc/elogind
         -Ddefault-hierarchy=hybrid
         -Dcgroup-controller=openrc
 #         -Ddefault-kill-user-processes=false
     )
 
-#     arch-meson "$pkgbase-${pkgver}" build "${meson_options[@]}"
-    arch-meson "$pkgbase" build "${meson_options[@]}"
+    arch-meson "$pkgbase-${pkgver}" build "${meson_options[@]}"
+#     arch-meson "$pkgbase" build "${meson_options[@]}"
 
     ninja -C build
+}
+
+check(){
+    cd build
+    meson test
 }
 
 package_elogind() {
     pkgdesc="The systemd project's logind, extracted to a standalone package"
     groups=('base')
     provides=("elogind=${pkgver}")
-    depends=('acl' 'pam' 'dbus' 'eudev' 'libseccomp' 'libelogind')
-    conflicts=('consolekit')
-    optdepends=('elogind-openrc: elogind initscript'
-                'polkit: polkit support')
+    depends=('acl' 'pam' 'dbus' 'eudev' 'libseccomp' 'libelogind' 'kexec-tools' 'artix-sysvcompat')
+    optdepends=('polkit: polkit support')
     backup=('etc/elogind/logind.conf')
 
     DESTDIR="$pkgdir" ninja -C build install
@@ -60,7 +65,7 @@ package_libelogind(){
     provides=('libelogind.so' "libelogind=${pkgver}")
     depends=('libcap' 'libeudev')
 
-    cd ${pkgbase} #-${pkgver}
+    cd ${pkgbase}-${pkgver}
 
     install -dm755 ${pkgdir}/usr/lib
     mv ${srcdir}/_libelogind/include ${pkgdir}/usr
