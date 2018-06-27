@@ -5,8 +5,8 @@
 
 pkgname=openssh
 pkgver=7.7p1
-pkgrel=1
-pkgdesc='Free version of the SSH connectivity tools'
+pkgrel=2
+pkgdesc='Premier connectivity tool for remote login with the SSH protocol'
 url='https://www.openssh.com/portable.html'
 license=('custom:BSD')
 arch=('x86_64')
@@ -17,11 +17,13 @@ optdepends=('xorg-xauth: X11 forwarding'
 validpgpkeys=('59C2118ED206D927E667EBE3D3E5F56B6D920D30')
 source=("https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/${pkgname}-${pkgver}.tar.gz"{,.asc}
         'openssl-1.1.0.patch'
+        'tuntap.patch'
         'sshd.conf'
         'sshd.pam')
 sha256sums=('d73be7e684e99efcd024be15a30bffcbe41b012b2f7b3c9084aed621775e6b8f'
             'SKIP'
             'fa91849cc3161916f563bda5413676342e0bcc2705857e9d01b73c70e4904adf'
+            'bd3698425ece4853d67a9f9e934d37ad22948754c9b82e0a872eb854e94220ce'
             '4effac1186cc62617f44385415103021f72f674f8b8e26447fc1139c670090f6'
             '64576021515c0a98b0aaf0a0ae02e0f5ebe8ee525b1e647ab68f369f81ecd846')
 
@@ -32,6 +34,8 @@ prepare() {
 
 	# OpenSSL 1.1.0 patch from http://vega.pgw.jp/~kabe/vsd/patch/openssh-7.4p1-openssl-1.1.0c.patch.html
 	patch -p1 -i ../openssl-1.1.0.patch
+
+	patch -p1 -i ../tuntap.patch
 }
 
 build() {
