@@ -1,11 +1,12 @@
 ##
 ## Artix Linux repository mirrorlist
-## Generated on 2018-06-23
+## Generated on 2018-06-27
 ##
 
 # Artix mirrors
 
 Server = https://mirror.clarkson.edu/artix-linux/repos/$repo/os/$arch
+Server = https://ftp.sh.cvut.cz/artix-linux/$repo/os/$arch
 Server = https://ftp.cc.uoc.gr/mirrors/linux/artixlinux/$repo/os/$arch
 Server = http://artix.wheaton.edu/repos/$repo/os/$arch
 Server = http://mirror.strits.dk/artix-linux/repos/$repo/os/$arch
