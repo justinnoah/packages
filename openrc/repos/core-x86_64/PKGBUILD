@@ -6,7 +6,7 @@ _url="https://github.com/OpenRC/openrc/archive"
 
 pkgbase=openrc
 pkgname=('openrc' 'openrc-bash-completions' 'openrc-zsh-completions')
-pkgver=0.37
+pkgver=0.38.1
 pkgrel=1
 pkgdesc="Gentoo's universal init system"
 arch=('x86_64')
@@ -22,7 +22,7 @@ source=("${pkgbase}-${pkgver}.tar.gz::${_url}/${pkgver}.tar.gz"
         'openrc-remove.hook'
         'sysctl.hook'
         'sysctl.conf')
-sha256sums=('3c61a3db41860258b8a41ff5e113de5dc185e7fa99d4c768b00217651669585e'
+sha256sums=('afa9bdb40c516daaba5f2dcfca0c2edc3f833b3dd491ece60b2146eb6d85ac1d'
             '0b44210db9770588bd491cd6c0ac9412d99124c6be4c9d3f7d31ec8746072f5c'
             'efc7bcb19bbaf11372d304006eb81e89c26ca5f2524f7d171f46ada97e6d6001'
             '385d16b3133b53c459a3910a739304cd009478e37b5550f4ce698f7deea774f0'
