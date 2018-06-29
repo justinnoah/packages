@@ -6,8 +6,8 @@ _url="https://github.com/OpenRC/openrc/archive"
 
 pkgbase=openrc
 pkgname=('openrc' 'openrc-bash-completions' 'openrc-zsh-completions')
-pkgver=0.38
-pkgrel=2
+pkgver=0.38.1
+pkgrel=1
 pkgdesc="Gentoo's universal init system"
 arch=('x86_64')
 url="http://www.gentoo.org/proj/en/base/openrc/"
@@ -21,16 +21,14 @@ source=("${pkgbase}-${pkgver}.tar.gz::${_url}/${pkgver}.tar.gz"
         'openrc-install.hook'
         'openrc-remove.hook'
         'sysctl.hook'
-        'sysctl.conf'
-        init-uptime-ptr.patch::https://github.com/OpenRC/openrc/pull/231/commits/68c4967e20c1cb2a4c2a345d3e122adaa5d1b3d3.patch)
-sha256sums=('1da00a07459b1a50cf90378573b2dab8c47f2d13719a7015ad9b9da3e7ab8cd5'
+        'sysctl.conf')
+sha256sums=('afa9bdb40c516daaba5f2dcfca0c2edc3f833b3dd491ece60b2146eb6d85ac1d'
             '0b44210db9770588bd491cd6c0ac9412d99124c6be4c9d3f7d31ec8746072f5c'
             'efc7bcb19bbaf11372d304006eb81e89c26ca5f2524f7d171f46ada97e6d6001'
             '385d16b3133b53c459a3910a739304cd009478e37b5550f4ce698f7deea774f0'
             'a636d63fa753420cfbcaf451f97f68897e98d471a6f516b8edc14f509e42c013'
             '9065d497c2bcde322154e177607ccf25f6a89582eada99fc6008cb379ae00bca'
-            '4170bcf3655ff6fb32b35fc592a4294a64d25df98d2f0f09f467689ed1ad54ea'
-            '4314f35c40929279830ae9ceebf4e34f563d9791316e060ffcdf6dc3ba41f97d')
+            '4170bcf3655ff6fb32b35fc592a4294a64d25df98d2f0f09f467689ed1ad54ea')
 
 _args=(
     SYSCONFDIR=/etc
@@ -57,7 +55,6 @@ fi
 prepare(){
     cd "${srcdir}/${pkgbase}-${pkgver}"
     sed -i 's:0444:0644:' mk/sys.mk
-    patch -Np 1 -i $srcdir/init-uptime-ptr.patch
 }
 
 build(){
