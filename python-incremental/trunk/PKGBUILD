@@ -43,6 +43,7 @@ package_python-incremental() {
   install -D -m644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
 }
 
+
 package_python2-incremental() {
   depends=('python2-click' 'python2-twisted')
 
