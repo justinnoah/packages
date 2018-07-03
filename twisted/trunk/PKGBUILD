@@ -47,7 +47,7 @@ check() {
   PYTHONPATH="$PWD/build/lib.linux-$CARCH-3.6:$PYTHONPATH" xvfb-run python -m twisted.trial twisted || :
 
   cd "$srcdir"/twisted-twisted-$pkgver-py2
-  PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH" xvfb-run python2 -m twisted.trial twisted || warning "Tests failed" || :
+  PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH" xvfb-run python2 -m twisted.trial twisted || :
 }
 
 package_python-twisted() {
