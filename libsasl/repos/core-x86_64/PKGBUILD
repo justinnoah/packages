@@ -8,7 +8,7 @@
 #pkgname=('cyrus-sasl' 'cyrus-sasl-gssapi' 'cyrus-sasl-ldap' 'cyrus-sasl-sql')
 pkgname=libsasl
 pkgver=2.1.26
-pkgrel=12
+pkgrel=13
 pkgdesc="Cyrus Simple Authentication Service Layer (SASL) library"
 arch=('x86_64')
 url="http://cyrusimap.web.cmu.edu/"
@@ -23,8 +23,6 @@ source=(ftp://ftp.cyrusimap.org/cyrus-sasl/cyrus-sasl-${pkgver}.tar.gz
         0025_ld_as_needed.patch
         0026_drop_krb5support_dependency.patch
         0030-dont_use_la_files_for_opening_plugins.patch
-        saslauthd.service
-        saslauthd.conf.d
         tmpfiles.conf
         CVE-2013-4122.patch
         cyrus-sasl-sql.patch
@@ -39,8 +37,6 @@ md5sums=('a7f4e5e559a0e37b3ffc438c9456e425'
          '62bf892fe4d1df41ff748e91a1afaf67'
          'b7848957357e7c02d6490102be496bf9'
          '8e7106f32e495e9ade69014fd1b3352a'
-         '3499dcd610ad1ad58e0faffde2aa7a23'
-         '49219af5641150edec288a3fdb65e7c1'
          '45bb0192d2f188066240b9a66ee6365f'
          'c5f0ec88c584a75c14d7f402eaeed7ef'
          '82c0f66fdc5c1145eb48ea9116c27931'
@@ -154,7 +150,6 @@ package_cyrus-sasl() {
 
   cd cyrus-sasl-$pkgver/saslauthd
   make DESTDIR="${pkgdir}" install
-  install -Dm644 "${srcdir}/saslauthd.conf.d" "${pkgdir}/etc/conf.d/saslauthd"
   install -Dm644 "${srcdir}/tmpfiles.conf" "${pkgdir}/usr/lib/tmpfiles.d/saslauthd.conf"
 
   install -m755 -d "${pkgdir}/usr/share/licenses/cyrus-sasl"
