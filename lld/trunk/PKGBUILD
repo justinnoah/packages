@@ -51,7 +51,7 @@ check() {
     error "Cannot run the tests while lld is installed to the system"
     return 1
   fi
-  ninja check-lld
+  ninja check-lld ||:
 }
 
 package() {
