@@ -229,9 +229,6 @@ pipeline {
             }
         }
         stage('Build') {
-            environment {
-                BUILDBOT_GPGP = credentials('BUILDBOT_GPGP')
-            }
             when {
                 expression { return IS_BUILD == 'true' }
             }
@@ -253,6 +250,9 @@ pipeline {
             }
         }
         stage('Add') {
+            environment {
+                BUILDBOT_GPGP = credentials('BUILDBOT_GPGP')
+            }
             when {
                 anyOf {
                     expression { return IS_ADD == 'true' }
