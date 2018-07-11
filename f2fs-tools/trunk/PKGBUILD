@@ -4,7 +4,7 @@
 
 pkgname=f2fs-tools
 pkgver=1.11.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Tools for Flash-Friendly File System (F2FS)"
 arch=('x86_64')
 url='http://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/about/'
@@ -13,16 +13,27 @@ license=('GPL')
 source=("https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/snapshot/$pkgname-$pkgver.tar.gz")
 sha256sums=('b916ac7cda902502cf18de98da94921f71edbab40fb0437d757f0716191c79e3')
 
-build() {
-	cd "${pkgname}-${pkgver}"
+prepare() {
+    cd "${pkgname}-${pkgver}"
 
-	autoreconf -fi
-	./configure --prefix=/usr --sbindir=/usr/bin
-	make
+    # sg_write_buffer is provided in sg3_utils
+    sed -i '/sg_write_buffer/d' tools/Makefile.am
+
+    autoreconf -fi
 }
 
-package() {
-	cd "${pkgname}-${pkgver}"
 
-	make DESTDIR="${pkgdir}/" sbindir=/usr/bin install
+build() {
+    cd "${pkgname}-${pkgver}"
+
+    ./configure \
+        --prefix=/usr \
+        --sbindir=/usr/bin
+    make
+ }
+
+package() {
+    cd "${pkgname}-${pkgver}"
+
+    make DESTDIR="${pkgdir}/" sbindir=/usr/bin install
 }
