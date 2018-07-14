@@ -9,8 +9,8 @@ _func_url="${_url}/gentoo/gentoo-functions/archive"
 _func_ver=0.12
 
 pkgname=netifrc
-pkgver=0.6.0
-pkgrel=3
+pkgver=0.6.1
+pkgrel=1
 pkgdesc="Gentoo Network Interface Management Scripts"
 arch=('x86_64')
 url="http://www.gentoo.org/proj/en/base/openrc/"
@@ -19,7 +19,7 @@ depends=('eudev-openrc')
 backup=('etc/conf.d/net')
 source=("${pkgname}-${pkgver}.tar.gz::${_net_url}/${pkgver}.tar.gz"
         "gentoo-functions-${_func_ver}.tar.gz::${_func_url}/${_func_ver}.tar.gz")
-sha256sums=('b360f4e3b5081ab24db40403a4517c2b7b929fe10dffbd9900bc08d7f3ca650e'
+sha256sums=('004907e0c3db2d106d6a51d604d79f971f1013fa7642054ad7efe5076e52f7b3'
             '4a6ddb1d8be7b52aae68761fb26546663b6b0e74b155df263cddfbfa72373965')
 
 _id=artix
