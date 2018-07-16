@@ -1,10 +1,11 @@
 # Maintainer: Chris Cromer <cromer@artixlinux.org>
 # Maintainer: artoo <artoo@artixlinux.org>
+#
 
 pkgbase=opensysusers
 pkgname=(opensysusers opensysusers-openrc opensysusers-docs)
-pkgver=0.4.7
-pkgrel=4
+pkgver=0.4.8
+pkgrel=1
 pkgdesc="A standalone utility for handling systemd-style sysusers.d users and groups"
 arch=('any')
 url="https://github.com/artix-linux/opensysusers"
@@ -13,18 +14,11 @@ makedepends=('docbook-xsl')
 source=("${pkgbase}-${pkgver}.tar.gz::https://github.com/artix-linux/opensysusers/archive/${pkgver}.tar.gz"
 		'opensysusers.hook'
 		'sysusers-hook'
-		'sysusers'
-		"no-rlvl.patch::https://github.com/artix-linux/opensysusers/commit/4071c407ebb53b2a08d4093915561eaf74839d20.patch")
-sha256sums=('b69462ecd492270e46d93c0fa564a6f530dad25a09fc9a760998584affe15866'
+		'sysusers')
+sha256sums=('4d1bf4657e8a2420d8dcf8da63f86809e3f023603a0940b86e4d10d0f42a0720'
             'cefc133d78851cc3838eec273aeb127814c955be21c6e3fc0f9ba4391e534ec2'
             '4222b2496d8bb1ac9c07707e4ef1b334b8b59eb15451ea8ba0fd6e4c93e50c56'
-            '41137e2d817f674510ae84b726a853636a48b76780d81443c950bfa3c246b456'
-            'a24ff1b606ee129fa26b08b83121eeb3dd0321b03e4a645ca99b580f5e4228c5')
-
-prepare(){
-    cd "${pkgbase}-${pkgver}"
-    patch -Np 1 -i ${srcdir}/no-rlvl.patch
-}
+            '41137e2d817f674510ae84b726a853636a48b76780d81443c950bfa3c246b456')
 
 build(){
     cd "${pkgbase}-${pkgver}"
