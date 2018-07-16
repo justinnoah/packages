@@ -72,7 +72,7 @@ build() {
       --enable-modules=all \
       --enable-mods-shared=all \
       --enable-so \
-      --enable-suexec \
+      --enable-suexec-capabilites \
       --with-suexec-caller=http \
       --with-suexec-docroot=/srv/http \
       --with-suexec-logfile=/var/log/httpd/suexec.log \
