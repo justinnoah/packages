@@ -43,7 +43,7 @@ check() {
   pifpaf run memcached --port 11211 -- pifpaf run mongodb --port 27017 -- pifpaf run redis python setup.py nosetests || warning "Tests failed"
 
   cd "$srcdir"/beaker-$pkgver-py2
-  pifpaf run memcached --port 11211 -- pifpaf run mongodb --port 27017 -- pifpaf run redis python2 setup.py nosetests
+  pifpaf run memcached --port 11211 -- pifpaf run mongodb --port 27017 -- pifpaf run redis python2 setup.py nosetests || warning "Tests failed"
 }
 
 package_python-beaker() {
